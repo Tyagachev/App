@@ -3,25 +3,23 @@
 namespace App\Http\Controllers\Api\Auth\Registration;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Auth\Verify\ValidateNumberRequest;
 use Illuminate\Support\Facades\Auth;
 
 class UserVerifiedNumberController extends Controller
 {
-    public function verify(Request $request)
+    public function verify(ValidateNumberRequest $request)
     {
-        $validatedNumber = $request->validate([
-            'number' => 'required|min:6|max:6'
-        ]);
+        $validatedNumber = $request->validated();
 
         $auth = auth()->user()->verifyNumber;
 
         if (Auth::user()->id == $auth->uid && $auth->number == $validatedNumber['number']) {
-
             $auth->update(['verified' => true]);
 
             return response(['userId' => auth()->user()->id, 'verified' => true]);
         }
+
         return response(['verified' => false]);
     }
 }

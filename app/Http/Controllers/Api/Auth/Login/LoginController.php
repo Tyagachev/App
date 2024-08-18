@@ -3,22 +3,20 @@
 namespace App\Http\Controllers\Api\Auth\Login;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Auth\Login\UserLoginRequest;
 
 class LoginController extends Controller
 {
-    public function login(Request $request)
+    public function login(UserLoginRequest $request)
     {
-        $loginData = $request->validate([
-            'email' => 'email|required',
-            'password' => 'required'
-        ]);
+        $loginData = $request->validated();
 
         if (auth()->attempt($loginData)) {
             $accessToken = auth()->user()->createToken('authToken', ['server:update'])->accessToken;
 
             return response(['user' => auth()->user(), 'access_token' => $accessToken]);
         }
+
         return response(['message' => 'Invalid Credentials']);
     }
 }
