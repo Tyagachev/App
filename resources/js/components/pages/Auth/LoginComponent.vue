@@ -16,17 +16,17 @@
                     <div class="card-header">Логин</div>
                     <div class="card-body">
                         <p style="color: red">{{ message }}</p>
-                            <div class="row mb-3">
+                        <div class="row mb-3">
                                 <label for="email" class="col-md-4 col-form-label text-md-end">Почта:</label>
                                 <div class="col-md-6">
+                                    <span class="text-danger" v-if="errors.email">{{ errors.email[0] }}</span>
                                     <input id="email" type="email" class="form-control" v-model="email" required autocomplete="email" autofocus>
                                 </div>
-                            </div>
-
+                        </div>
                             <div class="row mb-3">
                                 <label for="password" class="col-md-4 col-form-label text-md-end">Пароль:</label>
-
                                 <div class="col-md-6">
+                                    <span class="text-danger" v-if="errors.password">{{ errors.password[0] }}</span>
                                     <input id="password" type="password" class="form-control" v-model="password" required autocomplete="current-password">
                                 </div>
                             </div>
@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
     name: "LoginComponent",
     data() {
@@ -52,11 +54,24 @@ export default {
             email: null,
             password: null,
             message: '',
+            errors: {},
         }
     },
     methods: {
         login() {
-            this.$store.dispatch('authModule/LOGIN',{ email: this.email, password: this.password })
+            axios.post('/api/login', {email: this.email, password: this.password}).then(response => {
+                this.message = response.data.message
+                if (response.data.status === 200) {
+                    localStorage.setItem('x_xsrf_token', response.config.headers['X-CSRF-TOKEN']);
+                    if (response.data.user.verified === 0) {
+                        window.location.replace('/verify')
+                    } else {
+                        window.location.replace('/admin')
+                    }
+                }
+            }).catch(error => {
+                this.errors = error.response.data.errors;
+            });
         }
     }
 }
