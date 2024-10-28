@@ -7,30 +7,41 @@ use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Resources\User\UserResource;
 use App\Models\User;
 use App\Services\User\UserService;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
     /**
+     * Получение пользователя по ID
      * @param $id
      * @return Response
      */
     public function index($id): Response
     {
-        $user = User::query()->findOrFail($id);
-        return response(new UserResource($user));
+        return response(new UserResource(User::query()->findOrFail($id)));
     }
 
 
-    public function auth()
+    /**
+     * Получение данных аунтифицированного
+     * пользователя
+     *
+     * @return Response
+     */
+    public function auth(): Response
     {
         $user = auth()->user();
         return response(new UserResource($user));
     }
 
-
-    public function create(CreateUserRequest $request, UserService $service)
+    /**
+     * Добавление пользователя вручную
+     *
+     * @param CreateUserRequest $request
+     * @param UserService $service
+     * @return Response
+     */
+    public function create(CreateUserRequest $request, UserService $service): Response
     {
         $create = $service->manualCreateUser($request->validated());
 
@@ -38,11 +49,12 @@ class UserController extends Controller
     }
 
     /**
-     * Получение списка юзеров
-     * @return Collection
+     * Получение списка всех пользователей
+     *
+     * @return Response
      */
-    public function getAllUser(): Collection
+    public function getAllUser(): Response
     {
-        return User::all();
+        return response (UserResource::collection(User::all()));
     }
 }

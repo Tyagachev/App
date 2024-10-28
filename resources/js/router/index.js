@@ -50,7 +50,7 @@ const routes = [
                 page: () => import('../components/pages/User/UserListComponent.vue')
             }
         },{
-            path: '/user/:id',
+            path: '/user/:id?',
             name: 'user',
             components: {
                 page: () => import('../components/pages/User/UserProfileComponent.vue')

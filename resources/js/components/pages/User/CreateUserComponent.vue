@@ -26,7 +26,7 @@
 
                 </div>
                 <div class="d-flex">
-                    <button @click.prevent="generatePassword" class="btn btn-info">Создать</button>
+                    <button @click.prevent="generatePassword" class="btn btn-info">Генерировать</button>
                 </div>
                 <div class="form-group">
                     <label for="role">Роль<span class="text-danger">*</span></label>
@@ -96,7 +96,7 @@ export default {
                     this.visibleCredentials = true;
                 }
             }).catch(error => {
-                this.visibleCredentials = true;
+                this.visibleCredentials = false;
                 this. errors = error.response.data.errors;
             });
         },

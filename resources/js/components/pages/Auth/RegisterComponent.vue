@@ -18,16 +18,18 @@
                     <div class="card-body">
                         <form>
                             <div class="row mb-3">
-                                <label for="login" class="col-md-4 col-form-label text-md-end">Логин:</label>
+                                <label for="login" class="col-md-4 col-form-label text-md-end">Имя:</label>
 
                                 <div class="col-md-6">
+                                    <span class="text-danger" v-if="errors.name">{{ errors.name[0] }}</span>
                                     <input id="login" type="text" class="form-control" v-model="name" required autocomplete="login" autofocus>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="email" class="col-md-4 col-form-label text-md-end">Почта:</label>
 
+                                <label for="email" class="col-md-4 col-form-label text-md-end">Почта:</label>
                                 <div class="col-md-6">
+                                    <span class="text-danger" v-if="errors.email">{{ errors.email[0] }}</span>
                                     <input id="email" type="email" class="form-control" v-model="email" required autocomplete="email">
                                 </div>
                             </div>
@@ -36,6 +38,7 @@
                                 <label for="password" class="col-md-4 col-form-label text-md-end">Пароль:</label>
 
                                 <div class="col-md-6">
+                                    <span class="text-danger" v-if="errors.email">{{ errors.password[0] }}</span>
                                     <input id="password" type="password" class="form-control" v-model="password" required autocomplete="current-password">
                                 </div>
                             </div>
@@ -43,6 +46,7 @@
                                 <label for="password_confirmation" class="col-md-4 col-form-label text-md-end">Подтверждение пароля:</label>
 
                                 <div class="col-md-6">
+                                    <span class="text-danger" v-if="errors.email">{{ errors.password[0] }}</span>
                                     <input id="password_confirmation" type="password" class="form-control" v-model="password_confirmation" required autocomplete="current-password">
                                 </div>
                             </div>
@@ -70,7 +74,7 @@ export default {
             email: null,
             password: null,
             password_confirmation: null,
-            errors: null
+            errors: {}
         }
     },
     methods: {
@@ -87,9 +91,9 @@ export default {
                         this.$router.push({ name:'verify.page' });
                         //this.$router.push({ name: 'home.page', params: { id: res.data.user.id } })
                     }
-                }).catch(err => {
-                    this.errors = err
-                    console.log(err)
+                }).catch(error => {
+                    this.errors = error.response.data.errors;
+                    console.log(this.errors)
                 });
         }
     }

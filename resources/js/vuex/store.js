@@ -7,7 +7,7 @@ import statisticsModule  from "../vuex/modules/statistics.js";
 
 const store = createStore({
      state: {
-         //
+         search: ''
      },
      getters: {
          //
