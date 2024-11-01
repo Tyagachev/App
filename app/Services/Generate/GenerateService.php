@@ -17,6 +17,7 @@ class GenerateService
     public function generatePassword(): string
     {
         $length = random_int(8, 12);
+
         return Str::random($length);
     }
 }

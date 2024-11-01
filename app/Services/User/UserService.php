@@ -38,6 +38,7 @@ class UserService
                 'password' => $password
             ];
         }
+
         return false;
     }
 
@@ -54,6 +55,7 @@ class UserService
             'uid' => $user->id,
             'role' => $data['role']
         ]);
+
         return true;
     }
 
@@ -71,6 +73,7 @@ class UserService
             'number' => random_int(111111, 999999),
             'verified' => true
         ]);
+
         return true;
     }
 }

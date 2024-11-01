@@ -18,7 +18,9 @@ class UserController extends Controller
      */
     public function index(): Response
     {
-        $userCollection = UserResource::collection(User::all());
+        $users = User::all()->reverse();
+        $userCollection = UserResource::collection($users );
+
         return response($userCollection);
     }
 
@@ -31,6 +33,7 @@ class UserController extends Controller
     public function show($id): Response
     {
         $user = new UserResource(User::query()->findOrFail($id));
+
         return response($user);
     }
 
@@ -44,6 +47,7 @@ class UserController extends Controller
     public function store(CreateUserRequest $request, UserService $service): Response
     {
         $create = $service->manualCreateUser($request->validated());
+
         return response($create, 201);
     }
 

@@ -15,7 +15,7 @@
                 </div>
 
                     <a class="small-box-footer">
-                        <router-link :to="{name: 'user-list.page'}">
+                        <router-link :to="{name: 'user.list.page'}">
                             <span class="text-dark">Подробнее</span><i class="fas fa-arrow-circle-right text-dark"></i>
                         </router-link>
 

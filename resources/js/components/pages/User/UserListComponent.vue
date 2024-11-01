@@ -13,7 +13,7 @@
     <Search />
     <div class="pt-2 border-top border-black">
         <div class="row">
-            <div v-for="user in users.reverse()" :key="user.id" class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+            <div v-for="user in users" :key="user.id" class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
             <div class="card bg-light d-flex flex-fill">
                 <div class="card-header text-muted border-bottom-0 p-2">
                 </div>
@@ -45,7 +45,7 @@
                         <!--<a href="#" class="btn btn-sm bg-teal">
                             <i class="fas fa-comments"></i>
                         </a>-->
-                        <router-link :to="{name:'user', params: {id: user.id}}">
+                        <router-link :to="{name: 'user', params: {id: user.id}}">
                         <a class="btn btn-sm btn-primary">
                             <i class="fas fa-user"></i> Профиль
                         </a>

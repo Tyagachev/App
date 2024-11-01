@@ -43,10 +43,16 @@ const routes = [
                 page: () => import('../components/pages/Ticket/TicketListComponent.vue')
             }
         },{
-            path: '/ticket',
-            name: 'create-ticket.page',
+            path: '/ticket/create',
+            name: 'ticket.create.page',
             components: {
                 page: () => import('../components/pages/Ticket/TicketCreateComponent.vue')
+            }
+        },{
+            path: '/ticket/edit/:id?',
+            name: 'ticket.edit.page',
+            components: {
+                page: () => import('../components/pages/Ticket/TicketUpdateComponent.vue')
             }
         },{
             path: '/home',
@@ -55,14 +61,14 @@ const routes = [
                 page: () => import('../components/pages/Home/Home.vue')
             }
         },{
-            path: '/create/user',
-            name: 'create.user.page',
+            path: '/user/create',
+            name: 'user.create.page',
             components: {
                 page: () => import('../components/pages/User/UserCreateComponent.vue')
             }
         },{
-            path: '/user-list',
-            name: 'user-list.page',
+            path: '/user/list',
+            name: 'user.list.page',
             components: {
                 page: () => import('../components/pages/User/UserListComponent.vue')
             }

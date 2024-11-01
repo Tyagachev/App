@@ -21,6 +21,7 @@ class RegistrationService
                 'uid' => $user->id,
                 'role' => 1
             ]);
+
             return $user;
         } else {
             $user->role()->create([
@@ -28,6 +29,7 @@ class RegistrationService
                 'role' => 0
             ]);
         }
+
         return $user;
     }
 

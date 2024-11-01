@@ -23,6 +23,7 @@ class TicketService
             $answer['answer'] = str_replace(["\r\n", "\r", "\n"], "<br/>", $answer['answer']);
             Answer::query()->create($answer + ['ticket_id' => $this->ticket->id]);
         }
+
         return true;
     }
 

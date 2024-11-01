@@ -6,29 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Ticket\TicketResource;
 use App\Models\Ticket;
 use App\Services\Ticket\TicketService;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Validator;
 
 class TicketController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
+     * Получение списка всех билетов
+     *
+     * @return Response
      */
-    public function index()
+    public function index(): Response
     {
         return response(TicketResource::collection(Ticket::all()));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
 
     /**
      * Добавление билетов и вопросов к ним
@@ -40,8 +32,10 @@ class TicketController extends Controller
     public function store(Request $request, TicketService $service): Response
     {
         if ($service->storeTicket($request->all())) {
+
             return response('Created', 201);
         }
+
         return response('Error');
     }
 
@@ -54,11 +48,15 @@ class TicketController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Получение данных одного билета
+     * для редактирования
+     *
+     * @param string $id
+     * @return TicketResource
      */
-    public function edit(string $id)
+    public function edit(string $id): TicketResource
     {
-        //
+        return new TicketResource(Ticket::query()->find($id));
     }
 
     /**
@@ -69,15 +67,18 @@ class TicketController extends Controller
         //
     }
 
+
     /**
-     * Удаление билет и ответов
+     * Удаление билета
      *
      * @param string $id
      * @param TicketService $service
-     * @return bool
+     * @return Response
      */
-    public function destroy(string $id, TicketService $service): bool
+    public function destroy(string $id, TicketService $service): Response
     {
-        return $service->destroyTicket($id);
+        $service->destroyTicket($id);
+
+        return response('Destroy', 201);
     }
 }

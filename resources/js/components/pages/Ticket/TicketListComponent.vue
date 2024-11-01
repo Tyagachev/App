@@ -1,11 +1,19 @@
 <template>
+        <div v-if="tickets.length === 0" >
+            <h4>Список билетов пуст</h4>
+        </div>
+        <div v-else-if="tickets.length !== 0">
+            <h4>Список билетов</h4>
+            <Search />
+        </div>
+    <div class="pt-2 border-top border-black">
         <div class="card card-primary" v-for="ticket in tickets" :key="ticket.id">
             <div class="card-header">
                 <h3 class="card-title">{{ ticket.title}}</h3>
             </div>
             <div v-if="user.role === 1" class="d-flex justify-content-end pt-1 pr-2">
                 <div>
-                    <router-link to="">
+                    <router-link :to="{name: 'ticket.edit.page', params: {id: ticket.id}}">
                         <button class="btn btn-info">
                             Редактировать
                         </button>
@@ -16,8 +24,7 @@
                 <div v-html="ticket.content"></div>
                 <div v-for="answer in ticket.answers" :key="answer.id">
                     <label class="toggle">
-                        <input :key="answer.id" class="toggle-checkbox" type="checkbox" :checked="answer.picked" role="switch" id="flexSwitchCheckDefault">
-                        <div class="toggle-switch"></div>
+                        <input :key="answer.id"  type="checkbox" :checked="answer.picked" role="switch">
                         <span v-html="answer.answer" class="pl-2"></span>
                     </label>
                 </div>
@@ -35,18 +42,26 @@
             </div>
             <!-- /.card-footer-->
         </div>
+    </div>
 </template>
 
 <script>
+
+import Search from "@/components/UI/Search/Search.vue";
 export default {
     name: "TicketListComponent",
+    components: {
+        Search
+    },
     mounted() {
         this.$store.dispatch('ticketModule/TICKETS_LIST');
     },
     methods: {
         destroy(id) {
             axios.delete('/api/ticket/destroy/' + id).then(response => {
-                this.$store.dispatch('ticketModule/TICKETS_LIST');
+                if (response.data === 'Destroy') {
+                    this.$store.dispatch('ticketModule/TICKETS_LIST');
+                }
             });
         }
     },
