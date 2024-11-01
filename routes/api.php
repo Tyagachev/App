@@ -1,12 +1,14 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\User\UserController;
+use App\Http\Controllers\Api\Generate\GenerateController;
+use App\Http\Controllers\Api\Statistics\StatisticsController;
 use App\Http\Controllers\Api\Auth\Login\LoginController;
 use App\Http\Controllers\Api\Auth\Registration\RegisterController;
 use App\Http\Controllers\Api\Auth\Registration\UserVerifiedNumberController;
-use App\Http\Controllers\Api\Statistics\StatisticsController;
-use App\Http\Controllers\Api\User\UserController;
-use App\Http\Controllers\Api\Generate\GenerateController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Ticket\TicketController;
+use App\Http\Controllers\Api\Auth\Check\CheckController;
 
 Route::post('/register', [RegisterController::class, 'register']);
 
@@ -19,15 +21,42 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     /**
      * User
      **/
-    Route::get('/user/{id}', [UserController::class, 'index']);
-    Route::get('/user-auth', [UserController::class, 'auth']);
-    Route::get('/users-list', [UserController::class, 'getAllUser']);
-    Route::post('/user/create', [UserController::class, 'create']);
+    Route::prefix('user')->group(function () {
+        Route::get('/list', [UserController::class, 'index']);
+        Route::get('/show/{id}', [UserController::class, 'show']);
+        Route::post('/create', [UserController::class, 'store']);
+    });
+
+
+    /**
+     * Ticket
+     **/
+    Route::prefix('ticket')->group(function () {
+        Route::get('/list', [TicketController::class, 'index']);
+        Route::post('/store', [TicketController::class, 'store']);
+        Route::get('/edit', [TicketController::class, 'edit']);
+        Route::delete('/destroy/{id}', [TicketController::class, 'destroy']);
+    });
+
 
     /**
      * Statistics
      **/
-    Route::get('/statistics/user-count',[StatisticsController::class, 'getCountUsers']);
+    Route::prefix('statistics')->group(function () {
+        Route::get('/user-count',[StatisticsController::class, 'getCountUsers']);
+    });
+
+    /**
+     * Check
+     *
+     * Контроллер проверки на авторизацию пользователя
+     * и получения данных о пользователе
+     **/
+    Route::prefix('check')->group(function () {
+        Route::get('/auth/user', [CheckController::class, 'authUser']);
+        Route::get('/auth/checked', [CheckController::class, 'authCheck']);
+    });
+
     /**
      * Generate
      **/

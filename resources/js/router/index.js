@@ -17,6 +17,11 @@ const routes = [
         component: () => import('../components/pages/Auth/RegisterComponent.vue')
     },
     {
+        path: '/forgot-password',
+        name: 'forgot.page',
+        component: () => import('../components/pages/Auth/ForgotPasswordComponent.vue'),
+    },
+    {
         path: '/verify',
         name: 'verify.page',
         component: () => import('../components/pages/Auth/VerifyComponent.vue'),
@@ -32,6 +37,18 @@ const routes = [
                 page: () => import('../components/pages/Statistics/StatisticsComponent.vue')
             }
         },{
+            path: '/ticket/list',
+            name: 'ticket-list.page',
+            components: {
+                page: () => import('../components/pages/Ticket/TicketListComponent.vue')
+            }
+        },{
+            path: '/ticket',
+            name: 'create-ticket.page',
+            components: {
+                page: () => import('../components/pages/Ticket/TicketCreateComponent.vue')
+            }
+        },{
             path: '/home',
             name: 'home.page',
             components: {
@@ -41,7 +58,7 @@ const routes = [
             path: '/create/user',
             name: 'create.user.page',
             components: {
-                page: () => import('../components/pages/User/CreateUserComponent.vue')
+                page: () => import('../components/pages/User/UserCreateComponent.vue')
             }
         },{
             path: '/user-list',
@@ -50,7 +67,7 @@ const routes = [
                 page: () => import('../components/pages/User/UserListComponent.vue')
             }
         },{
-            path: '/user/:id?',
+            path: '/user/show/:id?',
             name: 'user',
             components: {
                 page: () => import('../components/pages/User/UserProfileComponent.vue')

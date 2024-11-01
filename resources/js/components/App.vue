@@ -5,8 +5,6 @@
 </template>
 <script>
 
-import PageLayout from "@/components/Layouts/PageLayout.vue";
-
 export default {
     name: "App",
     data() {

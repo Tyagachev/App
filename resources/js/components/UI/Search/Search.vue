@@ -1,5 +1,5 @@
 <template>
-    <div class="col-md-8">
+    <div>
         <form action="simple-results.html">
             <div class="input-group mb-2">
                 <input v-model="this.$store.state.search" type="search" class="form-control form-control-lg" placeholder="Поиск">

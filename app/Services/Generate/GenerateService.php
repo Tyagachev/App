@@ -8,6 +8,9 @@ class GenerateService
 {
 
     /**
+     * Метод для генерации пароля при создании
+     * пользователя вручную
+     *
      * @return string
      * @throws \Exception
      */

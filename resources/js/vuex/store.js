@@ -1,13 +1,15 @@
 import { createStore } from 'vuex'
 
-import userModule from '../vuex/modules/user.js';
-import authModule from '../vuex/modules/auth.js'
-import verifyModule from "../vuex/modules/verify.js";
-import statisticsModule  from "../vuex/modules/statistics.js";
+import user from '../vuex/modules/user.js';
+import auth from '../vuex/modules/auth.js'
+import verify from "../vuex/modules/verify.js";
+import statistics from "../vuex/modules/statistics.js";
+import ticket from "../vuex/modules/ticket.js"
 
 const store = createStore({
      state: {
-         search: ''
+         search: '',
+         content: ''
      },
      getters: {
          //
@@ -19,10 +21,11 @@ const store = createStore({
          //
      },
     modules: {
-        userModule: userModule,
-        authModule: authModule,
-        verifyModule: verifyModule,
-        statisticsModule: statisticsModule
+        userModule: user,
+        authModule: auth,
+        verifyModule: verify,
+        statisticsModule: statistics,
+        ticketModule: ticket
     },
 
 })

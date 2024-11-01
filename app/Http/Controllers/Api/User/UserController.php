@@ -12,26 +12,26 @@ use Illuminate\Http\Response;
 class UserController extends Controller
 {
     /**
-     * Получение пользователя по ID
-     * @param $id
-     * @return Response
-     */
-    public function index($id): Response
-    {
-        return response(new UserResource(User::query()->findOrFail($id)));
-    }
-
-
-    /**
-     * Получение данных аунтифицированного
-     * пользователя
+     * Получение списка всех пользователей
      *
      * @return Response
      */
-    public function auth(): Response
+    public function index(): Response
     {
-        $user = auth()->user();
-        return response(new UserResource($user));
+        $userCollection = UserResource::collection(User::all());
+        return response($userCollection);
+    }
+
+    /**
+     * Получение пользователя по ID
+     *
+     * @param $id
+     * @return Response
+     */
+    public function show($id): Response
+    {
+        $user = new UserResource(User::query()->findOrFail($id));
+        return response($user);
     }
 
     /**
@@ -41,20 +41,10 @@ class UserController extends Controller
      * @param UserService $service
      * @return Response
      */
-    public function create(CreateUserRequest $request, UserService $service): Response
+    public function store(CreateUserRequest $request, UserService $service): Response
     {
         $create = $service->manualCreateUser($request->validated());
-
         return response($create, 201);
     }
 
-    /**
-     * Получение списка всех пользователей
-     *
-     * @return Response
-     */
-    public function getAllUser(): Response
-    {
-        return response (UserResource::collection(User::all()));
-    }
 }

@@ -26,7 +26,7 @@
             </div>
 
 
-            <div class="card card-primary">
+            <!--<div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">About Me</h3>
                 </div>
@@ -53,7 +53,7 @@
                     <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
                 </div>
 
-            </div>
+            </div>-->
 
         </div>
     </div>

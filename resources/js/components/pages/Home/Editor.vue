@@ -299,6 +299,7 @@ export default {
 </script>
 
 <style>
+
 /* ---- Basic CSS reset ------------------------------------------------------ */
 *, ::after, ::before {
     -webkit-box-sizing: border-box;

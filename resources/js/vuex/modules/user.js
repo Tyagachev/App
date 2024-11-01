@@ -13,7 +13,7 @@ const getters = {
      * @returns {{}}
      * @constructor
      */
-    GET_AUTH_USER: state => {
+    GET_AUTH_USER: (state) => {
         return state.user
     },
 
@@ -23,7 +23,7 @@ const getters = {
      * @returns {{}}
      * @constructor
      */
-    GET_USER_INFO: state => {
+    GET_USER_INFO: (state) => {
         return state.userInfo
     },
 
@@ -33,7 +33,7 @@ const getters = {
      * @returns {[]}
      * @constructor
      */
-    GET_USERS_LIST: state => {
+    GET_USERS_LIST: (state) => {
         return state.users
     }
 };
@@ -75,6 +75,19 @@ const mutations = {
 }
 
 const actions = {
+
+    /**
+     * Получение списка пользователей
+     *
+     * @param context
+     * @constructor
+     */
+    GET_ALL_USERS: (context) => {
+        axios.get('/api/user/list').then(response => {
+            context.commit('SET_USERS_LIST', response.data);
+        });
+    },
+
     /**
      * Запрос в базу для плучения авторизированнаго
      * пользователя
@@ -83,7 +96,7 @@ const actions = {
      * @constructor
      */
     GET_AUTH_USER: (context) => {
-        axios.get('/api/user-auth').then(response => {
+        axios.get('/api/check/auth/user').then(response => {
             context.commit('SET_AUTH_USER', response.data);
         });
     },
@@ -96,22 +109,10 @@ const actions = {
      * @constructor
      */
     GET_USER_INFO_BY_ID: (context, id) => {
-        axios.get('/api/user/' + id ).then(response => {
+        axios.get('/api/user/show/' + id ).then(response => {
             context.commit('SET_USER_INFO', response.data)
         })
     },
-
-    /**
-     * Получение списка пользователей
-     *
-     * @param context
-     * @constructor
-     */
-    GET_ALL_USERS: (context) => {
-        axios.get('/api/users-list').then(response => {
-            context.commit('SET_USERS_LIST', response.data);
-        });
-    }
 }
 export default {
     namespaced: true,

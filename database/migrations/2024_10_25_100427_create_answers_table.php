@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
+            $table->text('answer');
+            $table->boolean('picked')->nullable();
+            $table->unsignedBigInteger('ticket_id');
+            $table->foreign('ticket_id')->references('id')->on('tickets');
             $table->timestamps();
         });
     }

@@ -1,29 +1,12 @@
 <template>
-    <div class="container">
-        <div class="mb-3">
-            <form @submit.prevent="onSubmit">
-                <button class=" btn btn-success">Отправить</button>
-            </form>
-        </div>
-        <div>
-            <Editor />
-        </div>
-    </div>
+    <h5>Home</h5>
 </template>
 <script>
-import Editor from "@/components/pages/Home/Editor.vue";
-import store from "@/vuex/store.js";
 export default {
     name: "Home",
-    components: {
-        Editor
-    },
     methods: {
-        onSubmit() {
-            console.log(store.state.content)
-            store.state.content = ''
+        ///
         }
-    }
 }
 
 </script>

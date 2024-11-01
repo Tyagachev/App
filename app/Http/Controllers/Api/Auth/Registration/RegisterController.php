@@ -14,10 +14,15 @@ class RegisterController extends Controller
     public function register(UserRegistrationRequest $request, RegistrationService $service): Response
     {
         $user = $service->createUser($request->validated());
+
         Auth::guard()->login($user);
+
         $accessToken = $user->createToken('authToken')->accessToken;
+
         if (auth()->user()) {
+
             $service->createVerifiedNumber(auth()->user());
+
             return response(['user' => $user, 'access_token' => $accessToken]);
         }
         return response('error');

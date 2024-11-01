@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class UserVerifiedNumber extends Model
 {
     use HasFactory;
-
     protected $guarded = [];
 
     protected $table = 'user_verified_numbers';

@@ -37,7 +37,7 @@
                     </select>
                 </div>
                 <div>
-                    <button @click.prevent="create" type="submit" class="btn btn-primary">Сохранить</button>
+                    <button @click.prevent="create" class="btn btn-primary">Сохранить</button>
                 </div>
             </div>
         </form>
@@ -57,7 +57,7 @@
                 <p class="card-text text-bold">
                     Пароль: {{credentials.password}}
                 </p>
-                <button @click.prevent="back"class="btn btn-success">Назад</button>
+                <button @click.prevent="back" class="btn btn-success">Назад</button>
             </div>
         </div>
     </div>

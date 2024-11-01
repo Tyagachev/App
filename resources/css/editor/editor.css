@@ -9,9 +9,9 @@
 .main-container {
     --ckeditor5-preview-height: 700px;
     font-family: 'Lato';
-    width: fit-content;
-    /*margin-left: auto;*/
-    /*margin-right: auto;*/
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .ck-content {
@@ -23,11 +23,14 @@
 
 .editor-container__editor-wrapper {
     display: flex;
-    width: fit-content;
+    max-width: 100%;
+    /*width: 100%;*/
+
 }
 
 .editor-container_document-editor {
     border: 1px solid var(--ck-color-base-border);
+
 }
 
 .editor-container_document-editor .editor-container__toolbar {
@@ -59,18 +62,20 @@
     min-height: var(--ckeditor5-preview-height);
     overflow-y: scroll;
     background: var(--ck-color-base-foreground);
+    display: flex;
+    justify-content: center;
 }
 
 .editor-container_document-editor .editor-container__editor {
     margin-top: 28px;
     margin-bottom: 28px;
-    height: 100%;
+    width: 100%;
+    /*min-width: 70%;*/
 }
 
 .editor-container_document-editor .editor-container__editor .ck.ck-editor__editable {
     box-sizing: border-box;
-    min-width: calc(210mm + 2px);
-    max-width: calc(210mm + 2px);
+    /*width: 100%;*/
     min-height: 297mm;
     height: fit-content;
     padding: 20mm 12mm;
@@ -78,7 +83,7 @@
     background: hsl(0, 0%, 100%);
     box-shadow: 0 2px 3px hsla(0, 0%, 0%, 0.078);
     flex: 1 1 auto;
-    margin-left: 72px;
-    margin-right: 72px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 

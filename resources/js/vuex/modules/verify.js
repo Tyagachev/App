@@ -78,7 +78,6 @@ const actions = {
      */
     SEND_VERIFY_CODE: async (context, code) => {
         let {data} = await axios.post('/api/confirm-verify', { number: code });
-        console.log(data)
         if (Number(state.uid) === data.userId && data.verified) {
             window.location.replace('/admin');
         } else {

@@ -5,15 +5,13 @@
             <Header />
             <!-- /.Header -->
             <!-- Main Sidebar Container -->
-            <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <aside class="main-sidebar sidebar-dark-primary elevation-4" style="position: fixed;">
                 <!-- Brand Logo -->
                 <router-link :to="{name:'admin.page'}">
                 <a href="" class="brand-link">
-
                     <div class="d-flex justify-content-center">
-                            <span class="brand-text font-weight-light">AdminLTE 3</span>
+                        <span class="brand-text font-weight-light">AdminLTE 3</span>
                     </div>
-
                     <!--<img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">-->
                 </a>
                 </router-link>
@@ -41,10 +39,7 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Sidebar Menu -->
-                   <SidebarMenu />
-                    <!-- /.sidebar-menu -->
+                        <SidebarMenu />
                 </div>
                 <!-- /.sidebar -->
             </aside>
@@ -58,7 +53,6 @@
                             <div class="col-sm-6">
                                 <!--<h1 class="m-0">Starter Page</h1>-->
                             </div>
-
                             <!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
@@ -78,7 +72,9 @@
                 <div class="content">
                     <div class="container-fluid">
                         <PageLayout>
-                            <RouterView name="page"/>
+                            <div class="container">
+                                <RouterView name="page"/>
+                            </div>
                         </PageLayout>
                         <!-- /.row -->
                     </div><!-- /.container-fluid -->

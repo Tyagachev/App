@@ -1,43 +1,53 @@
 <template>
-    <div class="container">
-        <div class="d-flex justify-content-center">
-            <div class="mt-3 mb-3" style="width: 200px; height: 170px;">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 261.76 226.69">
-                    <path d="M161.096.001l-30.225 52.351L100.647.001H-.005l130.877 226.688L261.749.001z"
-                          fill="#41b883"/>
-                    <path d="M161.096.001l-30.225 52.351L100.647.001H52.346l78.526 136.01L209.398.001z"
-                          fill="#34495e"/>
-                </svg>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Логин</div>
-                    <div class="card-body">
-                        <p style="color: red">{{ message }}</p>
-                        <div class="row mb-3">
-                                <label for="email" class="col-md-4 col-form-label text-md-end">Почта:</label>
-                                <div class="col-md-6">
-                                    <span class="text-danger" v-if="errors.email">{{ errors.email[0] }}</span>
-                                    <input id="email" type="email" class="form-control" v-model="email" required autocomplete="email" autofocus>
+    <div class="login-page" style="min-height: 496.781px;">
+        <div class="login-box">
+            <AdminLogo />
+            <!-- /.login-logo -->
+            <div class="card">
+                <div class="card-body login-card-body">
+                    <p class="login-box-msg">Вход в систему</p>
+                    <p style="color: red">{{ message }}</p>
+                    <form>
+                        <span class="text-danger" v-if="errors.email">{{ errors.email[0] }}</span>
+                        <div class="input-group mb-3">
+                            <input v-model="email" required autocomplete="email" autofocus type="email" class="form-control" placeholder="Email">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
                                 </div>
+                            </div>
                         </div>
-                            <div class="row mb-3">
-                                <label for="password" class="col-md-4 col-form-label text-md-end">Пароль:</label>
-                                <div class="col-md-6">
-                                    <span class="text-danger" v-if="errors.password">{{ errors.password[0] }}</span>
-                                    <input id="password" type="password" class="form-control" v-model="password" required autocomplete="current-password">
+                        <span class="text-danger" v-if="errors.password">{{ errors.password[0] }}</span>
+                        <div class="input-group mb-3">
+                            <input v-model="password" required autocomplete="password" autofocus type="password" class="form-control" placeholder="Пароль">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+                            <!-- /.col -->
+                            <div class="col-4">
+                                <button @click.prevent="login" type="submit" class="btn btn-primary btn-block">Вход</button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </form>
+                    <!-- /.social-auth-links -->
 
-                            <div class="row mb-0">
-                                <div class="col-md-8 offset-md-4">
-                                    <button @click.prevent="login" class="btn btn-primary">Вход</button>
-                                </div>
-                            </div>
-                    </div>
+                    <p class="mb-1">
+                        <router-link :to="{name: 'forgot.page'}">
+                            Я забыл свой пароль
+                        </router-link>
+                    </p>
+                    <p class="mb-0">
+                        <router-link :to="{name: 'register.page'}">
+                            Зарегистрироваться
+                        </router-link>
+                    </p>
                 </div>
+                <!-- /.login-card-body -->
             </div>
         </div>
     </div>
@@ -45,9 +55,10 @@
 
 <script>
 import axios from "axios";
-
+import AdminLogo from "@/components/pages/Partials/AdminLogo.vue";
 export default {
     name: "LoginComponent",
+    components: {AdminLogo},
     data() {
         return {
             uid: null,
@@ -56,6 +67,9 @@ export default {
             message: '',
             errors: {},
         }
+    },
+    mounted() {
+        this.$store.dispatch('authModule/AUTH_CHECK');
     },
     methods: {
         login() {
