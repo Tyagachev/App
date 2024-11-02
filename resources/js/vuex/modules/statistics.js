@@ -5,7 +5,9 @@ const state =  {
 };
 
 const getters = {
+
     /**
+     * Получение кол-ва юзеров
      *
      * @param state
      * @returns {null}
@@ -17,7 +19,9 @@ const getters = {
 };
 
 const mutations = {
+
     /**
+     * Запись кол-ва юзеров
      *
      * @param state
      * @param payload
@@ -31,6 +35,7 @@ const mutations = {
 const actions = {
 
     /**
+     * Суммарное кол-во юзеров
      *
      * @param context
      * @constructor

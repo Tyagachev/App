@@ -21,7 +21,8 @@ class TicketService
 
         foreach ($data['answers'] as $answer) {
             $answer['answer'] = str_replace(["\r\n", "\r", "\n"], "<br/>", $answer['answer']);
-            Answer::query()->create($answer + ['ticket_id' => $this->ticket->id]);
+            $inArray = $answer + ['ticket_id' => $this->ticket->id];
+            Answer::query()->create($inArray);
         }
 
         return true;

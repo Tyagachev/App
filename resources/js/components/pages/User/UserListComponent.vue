@@ -65,7 +65,7 @@ export default {
     name: "UserListComponent",
     components: {Search},
     mounted() {
-        this.$store.dispatch('userModule/GET_ALL_USERS');
+        this.$store.dispatch('userModule/USERS_LIST');
     },
     computed: {
         users() {

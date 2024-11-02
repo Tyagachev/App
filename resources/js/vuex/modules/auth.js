@@ -13,6 +13,13 @@ const mutations = {
 }
 
 const actions = {
+
+    /**
+     * Проверка аунтифицирован
+     * пользователь или нет
+     *
+     * @constructor
+     */
     AUTH_CHECK: () => {
         axios.get('/api/check/auth/checked').then(response => {
             if (response.data.check && response.data.status === 200) {
@@ -22,6 +29,7 @@ const actions = {
     },
 
     /**
+     * Выход из системы
      *
      * @returns {Promise<void>}
      * @constructor

@@ -34,7 +34,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::prefix('ticket')->group(function () {
         Route::get('/list', [TicketController::class, 'index']);
         Route::post('/store', [TicketController::class, 'store']);
-        Route::get('/edit', [TicketController::class, 'edit']);
+        Route::get('/edit/{id}', [TicketController::class, 'edit']);
         Route::delete('/destroy/{id}', [TicketController::class, 'destroy']);
     });
 

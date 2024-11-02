@@ -70,7 +70,7 @@ export default {
     },
     methods: {
         getUserInfo() {
-            this.$store.dispatch('userModule/GET_USER_INFO_BY_ID', this.$route.params.id);
+            this.$store.dispatch('userModule/USER_INFO_BY_ID', this.$route.params.id);
         }
     },
     computed: {

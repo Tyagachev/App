@@ -61,7 +61,7 @@ const actions = {
      * @returns {Promise<void>}
      * @constructor
      */
-    GET_AUTH_USER_VERIFY: async (context, user) => {
+    AUTH_USER_VERIFY: async (context, user) => {
         axios.get('/api/user-auth').then(response => {
             context.commit('SET_USER_VERIFY', response.data.verified);
             context.commit('SET_USER_ID', response.data.id);

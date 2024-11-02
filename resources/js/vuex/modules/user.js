@@ -7,6 +7,7 @@ const state =  {
 };
 
 const getters = {
+
     /**
      *
      * @param state
@@ -39,6 +40,7 @@ const getters = {
 };
 
 const mutations = {
+
     /**
      * Запись информации об
      * аунтифицированном пользователе
@@ -82,7 +84,7 @@ const actions = {
      * @param context
      * @constructor
      */
-    GET_ALL_USERS: (context) => {
+    USERS_LIST: (context) => {
         axios.get('/api/user/list').then(response => {
             context.commit('SET_USERS_LIST', response.data);
         });
@@ -95,7 +97,7 @@ const actions = {
      * @param context
      * @constructor
      */
-    GET_AUTH_USER: (context) => {
+    AUTH_USER: (context) => {
         axios.get('/api/check/auth/user').then(response => {
             context.commit('SET_AUTH_USER', response.data);
         });
@@ -108,7 +110,7 @@ const actions = {
      * @param id
      * @constructor
      */
-    GET_USER_INFO_BY_ID: (context, id) => {
+    USER_INFO_BY_ID: (context, id) => {
         axios.get('/api/user/show/' + id ).then(response => {
             context.commit('SET_USER_INFO', response.data)
         })

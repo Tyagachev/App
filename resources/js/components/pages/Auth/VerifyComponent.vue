@@ -34,7 +34,7 @@ export default {
         }
     },
     mounted() {
-        this.$store.dispatch('verifyModule/GET_AUTH_USER_VERIFY');
+        this.$store.dispatch('verifyModule/AUTH_USER_VERIFY');
     },
     methods: {
         send() {
