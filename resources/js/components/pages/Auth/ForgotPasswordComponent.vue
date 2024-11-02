@@ -7,9 +7,9 @@
                 <div class="card-body login-card-body">
                     <p class="login-box-msg">Вы забыли свой пароль? Здесь вы можете легко восстановить новый пароль.</p>
 
-                    <form action="recover-password.html" method="post">
+                    <form>
                         <div class="input-group mb-3">
-                            <input type="email" class="form-control" placeholder="Email">
+                            <input v-model="form.email" type="email" class="form-control" placeholder="Email">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-envelope"></span>
@@ -18,7 +18,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <button type="submit" class="btn btn-primary btn-block">Сбросить пароль</button>
+                                <button @click.prevent="sendEmail" type="submit" class="btn btn-primary btn-block">Сбросить пароль</button>
                             </div>
                             <!-- /.col -->
                         </div>
@@ -46,7 +46,23 @@ import AdminLogo from "@/components/pages/Partials/AdminLogo.vue";
 
 export default {
     name: "ForgotPasswordComponent",
-    components: {AdminLogo}
+    components: {
+        AdminLogo
+    },
+    data() {
+        return {
+            form: {
+                email: null
+            }
+        }
+    },
+    methods: {
+        sendEmail() {
+            axios.post('/api/recover-password', {email: this.form.email}).then(response => {
+                console.log(response);
+            })
+        }
+    }
 }
 </script>
 

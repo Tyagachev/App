@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Statistics\StatisticsController;
 use App\Http\Controllers\Api\Auth\Login\LoginController;
 use App\Http\Controllers\Api\Auth\Registration\RegisterController;
 use App\Http\Controllers\Api\Auth\Registration\UserVerifiedNumberController;
+use App\Http\Controllers\Api\Auth\Forgot\RecoverController;
 use App\Http\Controllers\Api\Ticket\TicketController;
 use App\Http\Controllers\Api\Auth\Check\CheckController;
 
@@ -15,6 +16,8 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/confirm-verify', [UserVerifiedNumberController::class, 'verify']);
 
 Route::post('/login', [LoginController::class, 'login']);
+
+Route::post('/recover-password', [RecoverController::class, 'sendResetCode']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
@@ -27,7 +30,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/create', [UserController::class, 'store']);
     });
 
-
     /**
      * Ticket
      **/
@@ -37,7 +39,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('/edit/{id}', [TicketController::class, 'edit']);
         Route::delete('/destroy/{id}', [TicketController::class, 'destroy']);
     });
-
 
     /**
      * Statistics
@@ -55,7 +56,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
      **/
     Route::prefix('check')->group(function () {
         Route::get('/auth/user', [CheckController::class, 'authUser']);
-        Route::get('/auth/checked', [CheckController::class, 'authCheck']);
+
     });
 
     /**
@@ -65,5 +66,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/test/{id}', [\App\Http\Controllers\Api\TestAuthController::class, 'test'])->name('test');
     Route::post('/logout', [LoginController::class, 'logout']);
 });
+
+Route::get('/check/auth/checked', [CheckController::class, 'authCheck']);
 
 //Auth::routes(['verify' => true]);

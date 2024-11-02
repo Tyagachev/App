@@ -12,16 +12,18 @@ class LoginController extends Controller
 {
 
     /**
+     * Аунтификация пользователя
+     *
      * @param UserLoginRequest $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Foundation\Application|Response
+     * @return Response
      */
-    public function login(UserLoginRequest $request)
+    public function login(UserLoginRequest $request): Response
     {
         $loginData = $request->validated();
         if (Auth::attempt($loginData)) {
             auth()->user()->createToken('authToken', ['server:update'])->accessToken;
             return response([ 'user' => new UserResource(auth()->user()), 'status' => 200]);
         }
-        return response(['message' => 'Invalid Credentials']);
+        return response(['message' => 'Неверные учетные данные']);
     }
 }

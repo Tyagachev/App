@@ -22,8 +22,10 @@ const actions = {
      */
     AUTH_CHECK: () => {
         axios.get('/api/check/auth/checked').then(response => {
-            if (response.data.check && response.data.status === 200) {
-                window.location.replace('/admin')
+            if (response.data.check !== 'no-check') {
+                if (response.data.check && response.data.status === 200) {
+                    window.location.replace('/admin')
+                }
             }
         })
     },

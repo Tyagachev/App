@@ -2,7 +2,7 @@
 
 namespace App\Services\Auth;
 
-use App\Actions\Registration\SendMailVerifiedNumber;
+use App\Actions\Auth\Registration\SendMailVerifiedNumber;
 use App\Models\User;
 use App\Models\UserVerifiedNumber;
 use Illuminate\Database\Eloquent\Model;

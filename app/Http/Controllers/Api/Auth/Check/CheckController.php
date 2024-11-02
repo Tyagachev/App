@@ -27,6 +27,9 @@ class CheckController extends Controller
      */
     public function authCheck(): Response
     {
-        return response(['check' => Auth::check(), 'status' => 200]);
+        if (Auth::check()) {
+            return response(['check' => Auth::check(), 'status' => 200]);
+        }
+        return response(['check' => 'no-check']);
     }
 }
