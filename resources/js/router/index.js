@@ -38,7 +38,7 @@ const routes = [
             }
         },{
             path: '/ticket/list',
-            name: 'ticket-list.page',
+            name: 'ticket.list.page',
             components: {
                 page: () => import('../components/pages/Ticket/TicketListComponent.vue')
             }

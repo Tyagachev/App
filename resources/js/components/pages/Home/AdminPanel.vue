@@ -10,7 +10,7 @@
                 <router-link :to="{name:'admin.page'}">
                 <a href="" class="brand-link">
                     <div class="d-flex justify-content-center">
-                        <span class="brand-text font-weight-light">AdminLTE 3</span>
+                        <span class="brand-text font-weight-light">AdminAPP</span>
                     </div>
                     <!--<img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">-->
                 </a>

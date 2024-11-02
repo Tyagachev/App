@@ -62,7 +62,7 @@ const actions = {
      * @constructor
      */
     AUTH_USER_VERIFY: async (context, user) => {
-        axios.get('/api/user-auth').then(response => {
+        axios.get('/api/check/auth/user').then(response => {
             context.commit('SET_USER_VERIFY', response.data.verified);
             context.commit('SET_USER_ID', response.data.id);
         });
@@ -78,7 +78,9 @@ const actions = {
      */
     SEND_VERIFY_CODE: async (context, code) => {
         let {data} = await axios.post('/api/confirm-verify', { number: code });
+        console.log(data);
         if (Number(state.uid) === data.userId && data.verified) {
+            console.log('ssss')
             window.location.replace('/admin');
         } else {
             context.commit('SET_ERROR', 'Введен неправильный код');

@@ -66,7 +66,6 @@ const actions = {
     TICKETS_LIST: (context) => {
         axios.get('/api/ticket/list').then(response => {
             context.commit('SET_TICKETS_LIST', response.data);
-            console.log(context);
         });
     },
 
@@ -99,8 +98,6 @@ const actions = {
                 if (response.data === 'Created') {
                     window.location.replace('/ticket/list');
                 }
-            }).catch((error) => {
-            //
         })
     }
 }

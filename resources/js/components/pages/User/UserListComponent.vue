@@ -1,6 +1,11 @@
 <template>
     <div>
-        <h4>Список пользователей</h4>
+        <div v-if="users.length === 0" >
+            <h4>Список пользователей пуст</h4>
+        </div>
+        <div v-else-if="users.length !== 0">
+            <h4>Список пользователей</h4>
+        </div>
         <div>
             <div class="">
                 <span style="color: #687;">Поиск по имени или email</span>
@@ -21,7 +26,8 @@
                     <div class="row">
                         <div class="col-7">
                             <h2 class="lead"><b>{{user.name}}</b></h2>
-                            <p class="text-muted text-sm"><b>Роль: </b> {{(user.role === 1) ? 'Админ' : 'Юзер'}} </p>
+                            <p class="text-muted text-sm mb-0"><b>Роль: </b> {{(user.role === 1) ? 'Админ' : 'Юзер'}}</p>
+                            <p class="text-muted text-sm"><b>Создан:</b> {{user.created_at}}</p>
                             <ul class="ml-4 mb-0 fa-ul text-muted">
                                 <li class="small"><span class="fa-li">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-envelope-at-fill" viewBox="0 0 16 16">
