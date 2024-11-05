@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const state = {
-    //
+    user: {},
 }
 
 const getters = {
@@ -18,7 +18,17 @@ const getters = {
 }
 
 const mutations = {
-    //
+    /**
+     * Запись информации об
+     * аунтифицированном пользователе
+     *
+     * @param state
+     * @param payload
+     * @constructor
+     */
+    SET_AUTH_USER: (state, payload) => {
+        state.user = payload;
+    },
 }
 
 const actions = {
