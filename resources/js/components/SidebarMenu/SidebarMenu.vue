@@ -115,7 +115,7 @@ export default {
     name: "SidebarMenu",
     computed: {
         user() {
-            return this.$store.getters['userModule/GET_AUTH_USER'];
+            return this.$store.getters['authModule/GET_AUTH_USER'];
         }
     }
 }
