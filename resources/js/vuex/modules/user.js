@@ -14,16 +14,6 @@ const getters = {
      * @returns {{}}
      * @constructor
      */
-    GET_AUTH_USER: (state) => {
-        return state.user
-    },
-
-    /**
-     *
-     * @param state
-     * @returns {{}}
-     * @constructor
-     */
     GET_USER_INFO: (state) => {
         return state.userInfo
     },
@@ -87,19 +77,6 @@ const actions = {
     USERS_LIST: (context) => {
         axios.get('/api/user/list').then(response => {
             context.commit('SET_USERS_LIST', response.data);
-        });
-    },
-
-    /**
-     * Запрос в базу для плучения авторизированнаго
-     * пользователя
-     *
-     * @param context
-     * @constructor
-     */
-    AUTH_USER: (context) => {
-        axios.get('/api/check/auth/user').then(response => {
-            context.commit('SET_AUTH_USER', response.data);
         });
     },
 

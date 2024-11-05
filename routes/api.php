@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\Statistics\StatisticsController;
 use App\Http\Controllers\Api\Auth\Login\LoginController;
 use App\Http\Controllers\Api\Auth\Registration\RegisterController;
 use App\Http\Controllers\Api\Auth\Registration\UserVerifiedNumberController;
-use App\Http\Controllers\Api\Auth\Forgot\RecoverController;
+use App\Http\Controllers\Api\Auth\Recover\RecoverController;
 use App\Http\Controllers\Api\Ticket\TicketController;
 use App\Http\Controllers\Api\Auth\Check\CheckController;
 

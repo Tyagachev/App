@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Auth\Forgot;
+namespace App\Http\Controllers\Api\Auth\Recover;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Forgot\ForgotRequest;

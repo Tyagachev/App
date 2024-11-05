@@ -115,11 +115,11 @@ export default {
         Footer
     },
     mounted() {
-        this.$store.dispatch('userModule/AUTH_USER');
+        this.$store.dispatch('authModule/AUTH_USER');
     },
     computed: {
         user() {
-            return this.$store.getters['userModule/GET_AUTH_USER'];
+            return this.$store.getters['authModule/GET_AUTH_USER'];
         }
     }
 }

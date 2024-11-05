@@ -5,7 +5,16 @@ const state = {
 }
 
 const getters = {
-    //
+
+    /**
+     *
+     * @param state
+     * @returns {{}}
+     * @constructor
+     */
+    GET_AUTH_USER: (state) => {
+        return state.user
+    }
 }
 
 const mutations = {
@@ -14,6 +23,18 @@ const mutations = {
 
 const actions = {
 
+    /**
+     * Запрос в базу для плучения авторизированнаго
+     * пользователя
+     *
+     * @param context
+     * @constructor
+     */
+    AUTH_USER: (context) => {
+        axios.get('/api/check/auth/user').then(response => {
+            context.commit('SET_AUTH_USER', response.data);
+        });
+    },
     /**
      * Проверка аунтифицирован
      * пользователь или нет
