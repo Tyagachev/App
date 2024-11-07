@@ -17,7 +17,9 @@ Route::post('/confirm-verify', [UserVerifiedNumberController::class, 'verify']);
 
 Route::post('/login', [LoginController::class, 'login']);
 
-Route::post('/recover-password', [RecoverController::class, 'sendResetCode']);
+Route::post('/recovery-password', [RecoverController::class, 'sendResetCode']);
+Route::post('/recovery-check', [RecoverController::class, 'checkRecoveryCode']);
+Route::post('/reset-password', [RecoverController::class, 'resetPassword']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
@@ -64,9 +66,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
      **/
     Route::post('/generate-password', [GenerateController::class, 'create']);
     Route::get('/test/{id}', [\App\Http\Controllers\Api\TestAuthController::class, 'test'])->name('test');
-    Route::post('/logout', [LoginController::class, 'logout']);
-});
 
+});
+Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/check/auth/checked', [CheckController::class, 'authCheck']);
 
 //Auth::routes(['verify' => true]);

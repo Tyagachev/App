@@ -9,16 +9,24 @@ import ticket from "../vuex/modules/ticket.js"
 const store = createStore({
      state: {
          search: '',
-         content: ''
+         content: '',
+         recoveryMail: '',
+         token: ''
      },
      getters: {
-         //
+         GET_RECOVERY_MAIL:(state) => {
+             return state.recoveryMail;
+         }
      },
      mutations: {
-         //
+         SET_RECOVERY_MAIL: (state, payload) => {
+             state.recoveryMail = payload;
+         }
      },
      actions: {
-         //
+         RECOVERY_MAIL:(context, email) => {
+            context.commit('SET_RECOVERY_MAIL', email);
+         }
      },
     modules: {
         userModule: user,

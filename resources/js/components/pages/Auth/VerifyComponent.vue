@@ -1,34 +1,40 @@
 <template>
-    <div class="login-page" style="min-height: 496.781px;">
-    <div class="container">
-            <div class="row justify-content-center mt-5">
-                <div class="col-md-8">
-                    <div class="card card-primary">
-                        <div class="card-header text-center">Подтвердите свой адрес электронной почты</div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-center flex-column align-items-center">
-                                <div v-if="!getError">
-                                    <p>Введите проверочный код из письма.</p>
-                                </div>
-                                <div v-else>
-                                    <p class="text-danger">{{ getError }}</p>
-                                </div>
-                                <div class="input-group mb-3 w-50">
-                                    <input  class="form-control mr-1 text-center text-bold" aria-describedby="button-addon1" v-model="code" placeholder="Введите проверочный код" required>
-                                </div>
+    <div class="login-page" style="min-height: 332.781px;">
+        <div class="login-box">
+            <AdminLogo />
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Введите проверочный код из письма.</p>
+                <p><span class="text-danger">{{ getError }}</span></p>
+                <form>
+                    <div class="input-group mb-3">
+                        <input v-model="code" autofocus class="form-control text-center" placeholder="Введите код из письма" required>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16">
+                                    <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2M2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+                                </svg>
                             </div>
                         </div>
                     </div>
-                </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button @click.prevent="sendCode" class="btn btn-primary btn-block">Отправить</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-
+import AdminLogo from "@/components/pages/Partials/AdminLogo.vue";
 export default {
     name: "VerifyComponent",
+    components: {
+        AdminLogo
+    },
     data() {
         return {
             code: null,
@@ -38,16 +44,8 @@ export default {
         this.$store.dispatch('verifyModule/AUTH_USER_VERIFY');
     },
     methods: {
-        send(code) {
-            if (code.length >= 6) {
-                this.$store.dispatch('verifyModule/SEND_VERIFY_CODE', this.code);
-            }
-        }
-    },
-    watch:{
-        code(code) {
-            this.code = code
-            this.send(code);
+        sendCode() {
+            this.$store.dispatch('verifyModule/SEND_VERIFY_CODE', this.code);
         }
     },
     computed: {

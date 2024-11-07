@@ -5,7 +5,7 @@
             <!-- /.login-logo -->
             <div class="card">
                 <div class="card-body login-card-body">
-                    <p class="login-box-msg">Вход в систему</p>
+                    <p class="login-box-msg">Вход</p>
                     <p style="color: red">{{ message }}</p>
                     <form>
                         <span class="text-danger" v-if="errors.email">{{ errors.email[0] }}</span>
@@ -28,7 +28,7 @@
                         </div>
                         <div class="row">
                             <!-- /.col -->
-                            <div class="col-4">
+                            <div class="col-12">
                                 <button @click.prevent="login" type="submit" class="btn btn-primary btn-block">Вход</button>
                             </div>
                             <!-- /.col -->
