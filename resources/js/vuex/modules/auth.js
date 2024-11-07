@@ -7,6 +7,8 @@ const state = {
 const getters = {
 
     /**
+     * Получение данных авторизированного
+     * пользователя
      *
      * @param state
      * @returns {{}}
