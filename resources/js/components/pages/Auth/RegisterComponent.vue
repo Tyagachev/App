@@ -36,7 +36,8 @@
                             <input id="password" type="password" class="form-control" v-model="password" required autocomplete="current-password" placeholder="Пароль">
                             <div class="input-group-append">
                                 <div class="input-group-text">
-                                    <span class="fas fa-lock"></span>
+                                    <span v-if="!lock" class="fas fa-lock"></span>
+                                    <span v-if="lock" class="fa fa-unlock"></span>
                                 </div>
                             </div>
                         </div>
@@ -47,7 +48,8 @@
                             <input id="password_confirmation" type="password" class="form-control" v-model="password_confirmation" required autocomplete="current-password"  placeholder="Подтверждение пароля">
                             <div class="input-group-append">
                                 <div class="input-group-text">
-                                    <span class="fas fa-lock"></span>
+                                    <span v-if="!lock" class="fas fa-lock"></span>
+                                    <span v-if="lock" class="fa fa-unlock"></span>
                                 </div>
                             </div>
                         </div>
@@ -83,11 +85,12 @@ export default {
             email: null,
             password: null,
             password_confirmation: null,
-            errors: {}
+            errors: {},
+            lock: false
         }
     },
     mounted() {
-        this.$store.dispatch('authModule/AUTH_CHECK');
+        //
     },
     methods: {
         registration() {
@@ -98,6 +101,7 @@ export default {
                 password_confirmation: this.password_confirmation
             }).then(response => {
                 if (response.status === 200) {
+                    this.lock = true;
                     localStorage.setItem('x_xsrf_token', response.config.headers['X-CSRF-TOKEN']);
                     localStorage.setItem('uid', response.data.user.id);
                     this.$router.push({ name:'verify.page' });

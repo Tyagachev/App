@@ -113,7 +113,7 @@ export default {
                     'underline',
                     '|',
                     'link',
-                    'insertImage',
+                    //'insertImage',
                     'insertTable',
                     '|',
                     'alignment',
@@ -277,7 +277,7 @@ export default {
             menuBar: {
                 isVisible: true
             },
-            placeholder: 'Введите или вставьте свой контент здесь!',
+            placeholder: 'Введите или вставьте контент здесь!',
             table: {
                 contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties']
             },

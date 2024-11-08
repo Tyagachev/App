@@ -161,6 +161,7 @@ export default {
                 }
             }).catch(error => {
                 if (error.response) {
+                    console.log(error.response);
                     this.codeIsWrong = 'Код неверный!'
                 }
             });

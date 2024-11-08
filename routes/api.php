@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\Auth\Check\CheckController;
 Route::post('/register', [RegisterController::class, 'register']);
 
 Route::post('/confirm-verify', [UserVerifiedNumberController::class, 'verify']);
+Route::post('/send-code-again', [RegisterController::class, 'sendCodeAgain']);
 
 Route::post('/login', [LoginController::class, 'login']);
 
@@ -21,7 +22,7 @@ Route::post('/recovery-password', [RecoverController::class, 'sendResetCode']);
 Route::post('/recovery-check', [RecoverController::class, 'checkRecoveryCode']);
 Route::post('/reset-password', [RecoverController::class, 'resetPassword']);
 
-Route::group(['middleware' => 'auth:sanctum'], function () {
+Route::group(['middleware' => 'logged:sanctum'], function () {
 
     /**
      * User
@@ -58,8 +59,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
      **/
     Route::prefix('check')->group(function () {
         Route::get('/auth/user', [CheckController::class, 'authUser']);
-
+        Route::get('/logged/checked', [CheckController::class, 'authCheck']);
     });
+
 
     /**
      * Generate
@@ -69,6 +71,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
 });
 Route::post('/logout', [LoginController::class, 'logout']);
-Route::get('/check/auth/checked', [CheckController::class, 'authCheck']);
+
 
 //Auth::routes(['verify' => true]);

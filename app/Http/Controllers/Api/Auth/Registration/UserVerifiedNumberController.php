@@ -12,10 +12,12 @@ class UserVerifiedNumberController extends Controller
     public function verify(ValidateNumberRequest $request): Response
     {
         $validatedNumber = $request->validated();
-        $auth = auth()->user()->verify;
+        $authUser = auth()->user();
+        $authVerify = $authUser->verify;
 
-        if (Auth::user()->id == $auth->uid && $auth->number == $validatedNumber['number']) {
-            $auth->update(['verified' => true]);
+        if (Auth::user()->id == $authVerify->uid && $authVerify->number == $validatedNumber['number']) {
+            //$authUser->update(['email_verified_at' => date('Y-m-d H:i:s.u')]);
+            $authVerify->update(['verified' => true]);
 
             return response(['userId' => auth()->user()->id, 'verified' => true]);
         }

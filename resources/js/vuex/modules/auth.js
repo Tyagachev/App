@@ -44,6 +44,7 @@ const actions = {
      */
     AUTH_USER: (context) => {
         axios.get('/api/check/auth/user').then(response => {
+            console.log(response)
             context.commit('SET_AUTH_USER', response.data);
         });
     },

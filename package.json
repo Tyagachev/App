@@ -21,6 +21,7 @@
         "ckeditor5": "^43.1.0",
         "ckeditor5-premium-features": "^43.1.1",
         "vue-router": "^4.3.0",
+        "vue3-ui-preloader": "^1.0.4",
         "vuex": "^4.1.0"
     }
 }

@@ -16,10 +16,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="d-flex align-items-center flex-column">
                         <div class="col-12">
                             <button @click.prevent="sendCode" class="btn btn-primary btn-block">Отправить</button>
                         </div>
+                            <a @click.prevent="sendCodeAgain" class="link">Отправить код повторно</a>
                         <!-- /.col -->
                     </div>
                 </form>
@@ -46,6 +47,9 @@ export default {
     methods: {
         sendCode() {
             this.$store.dispatch('verifyModule/SEND_VERIFY_CODE', this.code);
+        },
+        sendCodeAgain() {
+            this.$store.dispatch('verifyModule/SEND_CODE_AGAIN');
         }
     },
     computed: {

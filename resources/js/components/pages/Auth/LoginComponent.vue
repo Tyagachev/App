@@ -22,7 +22,8 @@
                             <input v-model="password" required autocomplete="password" autofocus type="password" class="form-control" placeholder="Пароль">
                             <div class="input-group-append">
                                 <div class="input-group-text">
-                                    <span class="fas fa-lock"></span>
+                                    <span v-if="!lock" class="fas fa-lock"></span>
+                                    <span v-if="lock" class="fa fa-unlock"></span>
                                 </div>
                             </div>
                         </div>
@@ -34,7 +35,7 @@
                             <!-- /.col -->
                         </div>
                     </form>
-                    <!-- /.social-auth-links -->
+                    <!-- /.social-logged-links -->
 
                     <p class="mb-1">
                         <router-link :to="{name: 'forgot.page'}">
@@ -66,10 +67,11 @@ export default {
             password: null,
             message: '',
             errors: {},
+            lock: false
         }
     },
     mounted() {
-        this.$store.dispatch('authModule/AUTH_CHECK');
+        /*this.$store.dispatch('authModule/AUTH_CHECK');*/
     },
     methods: {
         login() {
@@ -77,17 +79,20 @@ export default {
                 this.message = response.data.message
                 if (response.data.status === 200) {
                     localStorage.setItem('x_xsrf_token', response.config.headers['X-CSRF-TOKEN']);
+                    this.lock = true;
                     if (response.data.user.verified === 0) {
                         window.location.replace('/verify')
                     } else {
+                        this.$store.dispatch('AUTH', true);
                         window.location.replace('/admin')
                     }
                 }
             }).catch(error => {
+                //console.log(error.response);
                 this.errors = error.response.data.errors;
             });
         }
-    }
+    },
 }
 </script>
 

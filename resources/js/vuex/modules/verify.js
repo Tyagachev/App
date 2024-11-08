@@ -78,14 +78,16 @@ const actions = {
      */
     SEND_VERIFY_CODE: async (context, code) => {
         let {data} = await axios.post('/api/confirm-verify', { number: code });
-        console.log(data);
         if (Number(state.uid) === data.userId && data.verified) {
-            console.log('ssss')
             window.location.replace('/admin');
         } else {
             context.commit('SET_ERROR', 'Введен неправильный код');
         }
-
+    },
+    SEND_CODE_AGAIN: (context) => {
+        axios.post('/api/send-code-again', {uid: state.uid}).then(response => {
+            console.log(response.data);
+        });
     }
 }
 

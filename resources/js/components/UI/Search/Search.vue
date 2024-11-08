@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form action="simple-results.html">
+        <form>
             <div class="input-group mb-2">
                 <input v-model="this.$store.state.search" type="search" class="form-control form-control-lg" placeholder="Поиск">
                 <div class="input-group-append">

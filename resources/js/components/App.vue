@@ -5,6 +5,8 @@
 </template>
 <script>
 
+import loader from "vue3-ui-preloader";
+
 export default {
     name: "App",
     data() {
@@ -22,7 +24,5 @@ export default {
     }
 }
 </script>
-
 <style scoped>
-
 </style>

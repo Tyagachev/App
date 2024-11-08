@@ -1,25 +1,33 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router';
+import auth from "./middleware/auth.js";
+import logged from "./middleware/logged.js";
+import middlewarePipeline from './middlewarePipeline.js';
 import store from "../vuex/store.js";
 
 const routes = [
     {
         path: '/',
-        redirect: '/log',
+        redirect: '/admin',
     },
     {
         path: '/log',
         name: 'login.page',
-        component: () => import('../components/pages/Auth/LoginComponent.vue')
+        component: () => import('../components/pages/Auth/LoginComponent.vue'),
+        meta: {
+            middleware: [
+                logged
+            ]
+        }
     },
     {
         path: '/reg',
         name: 'register.page',
-        component: () => import('../components/pages/Auth/RegisterComponent.vue')
-    },
-    {
-        path: '/recover-password',
-        name: 'recover.password.page',
-        component: () => import('../components/pages/Auth/RecoverPasswordComponent.vue'),
+        component: () => import('../components/pages/Auth/RegisterComponent.vue'),
+        meta: {
+            middleware: [
+                logged
+            ]
+        }
     },
     {
         path: '/forgot-password',
@@ -30,11 +38,17 @@ const routes = [
         path: '/verify',
         name: 'verify.page',
         component: () => import('../components/pages/Auth/VerifyComponent.vue'),
+
     },
     {
       path: '/admin',
       name: 'admin.page',
       component: () => import('../components/pages/Home/AdminPanel.vue'),
+        meta: {
+            middleware: [
+                auth
+            ]
+        },
         children:[{
             path: '/statistics',
             name: 'statistics.page',
@@ -84,87 +98,34 @@ const routes = [
                 page: () => import('../components/pages/User/UserProfileComponent.vue')
             }
         }],
-        beforeEnter:(to, from, next) => {
-            const token = localStorage.getItem('x_xsrf_token');
-            const verifiedStore = store.state.userModule.verified;
-
-            if (token && verifiedStore !== 0 ) {
-                next()
-            } else if (token && verifiedStore === 0) {
-                next({name:'verify.page'})
-            } else {
-                next({name:'login.page'})
-            }
-        },
     },
 ]
 
 const router = createRouter({
+
   history: createWebHistory(),
   routes
 });
+router.beforeEach((to, from, next) => {
 
-/*router.beforeEach((to, from, next) => {
-    const token = localStorage.getItem('x_xsrf_token');
-    const verified = localStorage.getItem('v');
-    if (!token) {
-        if (to.name === 'login.page' || to.name === 'register.page') {
-            return next()
-        }
-    }
-
-})*/
-/*router.beforeEach((to, from, next) => {
-    const token = localStorage.getItem('x_xsrf_token');
-    const verified = localStorage.getItem('v');
-
-    if (!token) {
-        if (to.name === 'login.page' || to.name === 'register.page') {
-            return next()
-        } else {
-            return next({
-                name: 'login.page'
-            })
-        }
-    }
-
-    if (to.name === 'login.page' || to.name === 'register.page' && token) {
-        return next({
-            name: 'home.page'
-        })
-    }
-
-    /*if (token && verified !== true ) {
-        if (to.name === 'home.page') {
-            return next({name: 'verify.page'})
-        }
+    if (!to.meta.middleware) {
         return next()
     }
-    //return next()
-    if (token && verified === true) {
-        if (to.name === 'home.page') {
-            return next()
-        }
-    }*/
-    /*if (to.name === 'login.page' || to.name === 'register.page' && token) {
-        return next({
-            name: 'home.page'
-        })
-    }
-    return next()*/
 
-    /*if (to.name === 'login.page' || to.name === 'register.page' && token) {
-        return next({
-            name: 'home.page', params: { id: 1 }
-        })
-    }
-    return next()*/
+    const middleware = to.meta.middleware
 
-    /*if (from.name === 'login.page' && verified === 0) {
-        return next({
-            name: 'verify.page'
-        })
+    const context = {
+        to,
+        from,
+        next,
+        store
     }
-    next()*/
-//})
+
+    return middleware[0]({
+        ...context,
+        nextMiddleware: middlewarePipeline(context, middleware, 1)
+    })
+
+})
 export default router
+

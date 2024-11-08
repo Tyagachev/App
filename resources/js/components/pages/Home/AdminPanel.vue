@@ -72,6 +72,22 @@
                 <div class="content">
                     <div class="container-fluid">
                         <PageLayout>
+                            <Loader
+                                v-if="loading"
+                                name="dots"
+                                loadingText="LOADING..."
+                                textColor="#ffffff"
+                                textSize="20"
+                                textWeight="500"
+                                object="#ff9633"
+                                color1="#ffffff"
+                                color2="#17fd3d"
+                                size="5" speed="2"
+                                bg="#343a40"
+                                objectbg="#999793"
+                                opacity="80"
+                                :disableScrolling="true">
+                            </Loader>
                             <div class="container">
                                 <RouterView name="page"/>
                             </div>
@@ -82,7 +98,6 @@
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
-
             <!-- Control Sidebar -->
             <aside class="control-sidebar control-sidebar-dark">
                 <!-- Control sidebar content goes here -->
@@ -92,7 +107,6 @@
                 </div>
             </aside>
             <!-- /.control-sidebar -->
-
             <!-- Main Footer -->
             <Footer />
         </div>
@@ -105,17 +119,27 @@ import Navbar from "@/components/Navbar/Navbar.vue";
 import SidebarMenu from "@/components/SidebarMenu/SidebarMenu.vue";
 import Header from "@/components/Header/Header.vue";
 import PageLayout from "@/components/Layouts/PageLayout.vue";
+import Loader from "vue3-ui-preloader";
 export default {
     name: "AdminPanel",
     components: {
+        Loader,
         PageLayout,
         Header,
         SidebarMenu,
         Navbar,
         Footer
     },
+    data() {
+        return {
+            loading: true,
+        }
+    },
     mounted() {
         this.$store.dispatch('authModule/AUTH_USER');
+        setTimeout(() => {
+            this.loading = false;
+        }, 800);
     },
     computed: {
         user() {
