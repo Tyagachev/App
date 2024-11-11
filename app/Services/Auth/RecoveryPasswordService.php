@@ -34,8 +34,8 @@ class RecoveryPasswordService
         if ($user && $hasRecoveryNumber) {
             $hasRecoveryNumber->update(['number' => $number]);
             $sendNumber->sendRecoveryNumber( $user->email, $number);
-            return response($user->email, 201);
 
+            return response($user->email, 201);
         } elseif ($user && !$hasRecoveryNumber) {
             $sendNumber->sendRecoveryNumber($user->email, $number);
 
@@ -43,6 +43,7 @@ class RecoveryPasswordService
                 'email' => $user->email,
                 'number' => $number
             ]);
+
             return response($create, 201);
         }
     }

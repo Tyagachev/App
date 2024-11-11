@@ -6,13 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Registration\UserRegistrationRequest;
 use App\Models\User;
 use App\Services\Auth\RegistrationService;
-
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
+    /**
+     * Метод регистрации пользователя
+     *
+     * @param UserRegistrationRequest $request
+     * @param RegistrationService $service
+     * @return Response
+     * @throws \Exception
+     */
     public function register(UserRegistrationRequest $request, RegistrationService $service): Response
     {
         $user = $service->createUser($request->validated());
@@ -30,10 +37,19 @@ class RegisterController extends Controller
         return response('error');
     }
 
-    public function sendCodeAgain(Request $request, RegistrationService $service)
+    /**
+     * Метод повторной отправки проверочного кода
+     *
+     * @param Request $request
+     * @param RegistrationService $service
+     * @return Response
+     * @throws \Exception
+     */
+    public function sendCodeAgain(Request $request, RegistrationService $service): Response
     {
         $verified = $request->all();
         $user = User::query()->find($verified['uid']);
+
         return $service->createVerifiedNumber($user);
     }
 }

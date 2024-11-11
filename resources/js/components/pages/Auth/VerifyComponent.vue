@@ -2,7 +2,7 @@
     <div class="login-page" style="min-height: 332.781px;">
         <div class="login-box">
             <AdminLogo />
-            <div class="card-body login-card-body">
+            <div  v-if="getVERIFIELD !== null" class="card-body login-card-body">
                 <p class="login-box-msg">Введите проверочный код из письма.</p>
                 <p><span class="text-danger">{{ getError }}</span></p>
                 <form>
@@ -20,10 +20,14 @@
                         <div class="col-12">
                             <button @click.prevent="sendCode" class="btn btn-primary btn-block">Отправить</button>
                         </div>
-                            <a @click.prevent="sendCodeAgain" class="link">Отправить код повторно</a>
+                            <a href="" @click.prevent="sendCodeAgain" class="link">Отправить код повторно</a>
                         <!-- /.col -->
                     </div>
                 </form>
+            </div>
+            <div v-else class="text-center">
+                Для ввода кода необходимо авторизироваться
+                <router-link :to="{name: 'login.page'}">Авторизация</router-link>
             </div>
         </div>
     </div>
@@ -53,6 +57,9 @@ export default {
         }
     },
     computed: {
+        getVERIFIELD () {
+          return this.$store.getters['verifyModule/GET_VERIFIELD'];
+        },
         getError() {
             return this.$store.getters['verifyModule/GET_ERROR'];
         }

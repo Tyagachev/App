@@ -4,6 +4,7 @@ import logged from "./middleware/logged.js";
 import middlewarePipeline from './middlewarePipeline.js';
 import store from "../vuex/store.js";
 
+
 const routes = [
     {
         path: '/',
@@ -38,7 +39,6 @@ const routes = [
         path: '/verify',
         name: 'verify.page',
         component: () => import('../components/pages/Auth/VerifyComponent.vue'),
-
     },
     {
       path: '/admin',

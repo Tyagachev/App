@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class UserVerifiedNumberController extends Controller
 {
+    /**
+     * Проверка совпадения проверочного кода
+     *
+     * @param ValidateNumberRequest $request
+     * @return Response
+     */
     public function verify(ValidateNumberRequest $request): Response
     {
         $validatedNumber = $request->validated();
@@ -16,7 +22,7 @@ class UserVerifiedNumberController extends Controller
         $authVerify = $authUser->verify;
 
         if (Auth::user()->id == $authVerify->uid && $authVerify->number == $validatedNumber['number']) {
-            //$authUser->update(['email_verified_at' => date('Y-m-d H:i:s.u')]);
+
             $authVerify->update(['verified' => true]);
 
             return response(['userId' => auth()->user()->id, 'verified' => true]);

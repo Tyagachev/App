@@ -91,9 +91,9 @@ const actions = {
      */
     SEND_CONTENT_TICKET: (context, form) => {
         axios.post('/api/ticket/store', {
-            title:form.title,
+            title: form.title,
             content: store.state.content,
-            answers:form.answers
+            answers: form.answers
         }).then( response => {
                 if (response.data === 'Created') {
                     window.location.replace('/ticket/list');

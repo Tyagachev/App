@@ -1,4 +1,5 @@
 import axios from "axios";
+import store from "../store.js";
 
 const state =  {
     verified: null,
@@ -7,6 +8,9 @@ const state =  {
 }
 
 const getters = {
+    GET_VERIFIELD: state => {
+        return state.verified;
+    },
     /**
      *
      * @param state
@@ -79,6 +83,8 @@ const actions = {
     SEND_VERIFY_CODE: async (context, code) => {
         let {data} = await axios.post('/api/confirm-verify', { number: code });
         if (Number(state.uid) === data.userId && data.verified) {
+            //Отправка в store где присвоется переменная
+            await store.dispatch('AUTH', true);
             window.location.replace('/admin');
         } else {
             context.commit('SET_ERROR', 'Введен неправильный код');
