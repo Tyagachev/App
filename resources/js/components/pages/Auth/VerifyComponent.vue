@@ -2,7 +2,7 @@
     <div class="login-page" style="min-height: 332.781px;">
         <div class="login-box">
             <AdminLogo />
-            <div  v-if="getVERIFIELD !== null" class="card-body login-card-body">
+            <div  v-if="getVrf !== null" class="card-body login-card-body">
                 <p class="login-box-msg">Введите проверочный код из письма.</p>
                 <p><span class="text-danger">{{ getError }}</span></p>
                 <form>
@@ -20,7 +20,8 @@
                         <div class="col-12">
                             <button @click.prevent="sendCode" class="btn btn-primary btn-block">Отправить</button>
                         </div>
-                            <a href="" @click.prevent="sendCodeAgain" class="link">Отправить код повторно</a>
+                            <a v-if="viewButtonSendCode" href="" @click.prevent="sendCodeAgain" class="link">Отправить код повторно</a>
+                        <span v-if="viewTimer">Повторная отправка через {{ second }} c.</span>
                         <!-- /.col -->
                     </div>
                 </form>
@@ -43,6 +44,9 @@ export default {
     data() {
         return {
             code: null,
+            second: 60,
+            viewButtonSendCode: true,
+            viewTimer: false
         }
     },
     mounted() {
@@ -54,10 +58,24 @@ export default {
         },
         sendCodeAgain() {
             this.$store.dispatch('verifyModule/SEND_CODE_AGAIN');
+            this.timer()
+        },
+        timer() {
+            this.viewButtonSendCode = false;
+            this.viewTimer = true;
+            let timer = setInterval(()=> {
+                this.second--
+                if (this.second === 0) {
+                    clearInterval(timer)
+                    this.second = 60
+                    this.viewButtonSendCode = true;
+                    this.viewTimer = false;
+                }
+            }, 1000)
         }
     },
     computed: {
-        getVERIFIELD () {
+        getVrf() {
           return this.$store.getters['verifyModule/GET_VERIFIELD'];
         },
         getError() {

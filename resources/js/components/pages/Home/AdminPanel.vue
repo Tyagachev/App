@@ -24,7 +24,9 @@
                             <!--<img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">-->
                         </div>
                         <div class="info">
-                            <router-link :to="{name:'user', params: {id: user.id}}"><a class="d-block">{{ user.name }} (ID: {{user.id}})</a></router-link>
+                            <router-link :to="{name:'user', params: {id: user.id}}">
+                                <a class="d-block">{{ user.name }} (ID: {{user.id}})</a>
+                            </router-link>
                         </div>
                     </div>
 
@@ -132,7 +134,7 @@ export default {
     },
     data() {
         return {
-            loading: true,
+            loading: true
         }
     },
     mounted() {
