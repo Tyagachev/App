@@ -28,17 +28,28 @@ class UserService
         $role = $this->createRole($user, $data);
         $verifiedNumber = $this->createVerifiedNumber($user);
 
-        if ($role && $verifiedNumber) {
-            $send = new SendMailUserCredentials();
-            $send->sendMailUser($user, $password);
+        // отправляется письмо с данными на почту если true
+        if ($data['sendToMail']) {
+            if ($role && $verifiedNumber) {
+                $send = new SendMailUserCredentials();
+                $send->sendMailUser($user, $password);
 
-            return [
-                'email' => $user->email,
-                'name' => $user->name,
-                'password' => $password
-            ];
+                return [
+                    'email' => $user->email,
+                    'name' => $user->name,
+                    'password' => $password
+                ];
+            }
+            // не отправляется письмо с данными на почту если false
+        } elseif ($data['sendToMail'] === false) {
+            if ($role && $verifiedNumber) {
+                return [
+                    'email' => $user->email,
+                    'name' => $user->name,
+                    'password' => $password
+                ];
+            }
         }
-
         return false;
     }
 

@@ -27,7 +27,9 @@
             </div>
             <div v-else class="text-center">
                 Для ввода кода необходимо авторизироваться
-                <router-link :to="{name: 'login.page'}">Авторизация</router-link>
+                <router-link :to="{name: 'login.page'}">
+                    Авторизация
+                </router-link>
             </div>
         </div>
     </div>

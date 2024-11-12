@@ -23,11 +23,21 @@
                         <p class="text-danger" v-if="errors.password">{{ errors.password[0] }}</p>
                         <div class="d-flex">
                             <input v-model="form.password" type="text" class="form-control" id="exampleInputPassword" placeholder="Пароль (мин. 8 символов)">
+                            <button @click.prevent="generatePassword" class="btn btn-info">Генератор</button>
                         </div>
 
                     </div>
-                    <div class="d-flex">
-                        <button @click.prevent="generatePassword" class="btn btn-info">Генерировать</button>
+                    <div class="">
+
+                    </div>
+                    <div>
+                        <p class="mb-1"><b>Отправить данные на почту?</b></p>
+                        <label class="toggle">
+                            <input class="toggle-checkbox" type="checkbox" v-model="form.sendToMail" role="switch"
+                                   id="flexSwitchCheckDefault">
+                            <div class="toggle-switch blue"></div>
+
+                        </label>
                     </div>
                     <div class="form-group">
                         <label for="role">Роль<span class="text-danger">*</span></label>
@@ -76,6 +86,7 @@ export default {
                 email: null,
                 name: null,
                 password: null,
+                sendToMail: false,
                 role: 0
             },
             credentials: {},
@@ -92,6 +103,7 @@ export default {
         },
         create() {
             axios.post('/api/user/create', this.form).then(response => {
+                console.log(response.data);
                 this.credentials = response.data;
                 if (response.status === 201) {
                     this.visibleForm = false;
