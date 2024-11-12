@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,22 @@ Route::get('/clear', function() {
 
    return "Cleared!";
 
+});
+Route::get('/migrate', function() {
+    Artisan::call('migrate',
+        [
+            '--path' => 'database/migrations',
+            '--database' => env('DB_DATABASE'),
+            '--force' => true
+        ]);
+
+    return "Migrate";
+});
+
+Route::get('/migrate/fresh', function() {
+    Artisan::call('migrate:fresh');
+
+    return "Freshed";
 });
 
 Route::get('{page}', [App\Http\Controllers\IndexController::class, 'index'])->where('page', '.*');
