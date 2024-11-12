@@ -45,9 +45,7 @@ export default {
         return {
             code: null,
             second: 60,
-            localSecond: null,
-            viewButtonSendCode: true,
-            viewTimer: false
+            localSecond: null
         }
     },
     mounted() {
