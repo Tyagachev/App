@@ -83,6 +83,9 @@ const actions = {
     SEND_VERIFY_CODE: async (context, code) => {
         let {data} = await axios.post('/api/confirm-verify', { number: code });
         if (Number(state.uid) === data.userId && data.verified) {
+            // Удаляем таймер из хранилища
+            localStorage.removeItem('time')
+
             //Отправка в store где присвоется переменная
             await store.dispatch('AUTH', true);
             window.location.replace('/admin');

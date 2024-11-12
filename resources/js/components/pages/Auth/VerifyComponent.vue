@@ -18,10 +18,10 @@
                     </div>
                     <div class="d-flex align-items-center flex-column">
                         <div class="col-12">
-                            <button @click.prevent="sendCode" class="btn btn-primary btn-block">Отправить</button>
+                            <button @click.prevent="sendCode" class="btn btn-primary btn-block">Применить</button>
                         </div>
-                            <a v-if="viewButtonSendCode" href="" @click.prevent="sendCodeAgain" class="link">Отправить код повторно</a>
-                        <span v-if="viewTimer">Повторная отправка через {{ second }} c.</span>
+                            <a v-if="this.localSecond === null" href="" @click.prevent="sendCodeAgain" class="link">Отправить код повторно</a>
+                        <span v-if="this.localSecond !== null">Повторная отправка через {{ localSecond }} c.</span>
                         <!-- /.col -->
                     </div>
                 </form>
@@ -45,12 +45,14 @@ export default {
         return {
             code: null,
             second: 60,
+            localSecond: null,
             viewButtonSendCode: true,
             viewTimer: false
         }
     },
     mounted() {
         this.$store.dispatch('verifyModule/AUTH_USER_VERIFY');
+        this.checkTimer();
     },
     methods: {
         sendCode() {
@@ -61,17 +63,29 @@ export default {
             this.timer()
         },
         timer() {
-            this.viewButtonSendCode = false;
-            this.viewTimer = true;
-            let timer = setInterval(()=> {
-                this.second--
-                if (this.second === 0) {
+
+            if (localStorage.getItem('time') === null) {
+                localStorage.setItem('time', this.second);
+            }
+
+            const timer = setInterval(()=> {
+                this.localSecond = localStorage.getItem('time');
+                this.localSecond--
+                localStorage.setItem('time', this.localSecond);
+
+                if (this.localSecond === 0) {
                     clearInterval(timer)
-                    this.second = 60
-                    this.viewButtonSendCode = true;
-                    this.viewTimer = false;
+                    localStorage.removeItem('time')
+                    this.localSecond = null
                 }
             }, 1000)
+        },
+        checkTimer() {
+            this.localSecond = localStorage.getItem('time')
+            console.log(this.localSecond)
+            if (this.localSecond !== null) {
+                this.timer();
+            }
         }
     },
     computed: {
