@@ -21,8 +21,8 @@ class LoginController extends Controller
     {
         $loginData = $request->validated();
         if (Auth::attempt($loginData)) {
-            auth()->user()->createToken('authToken', ['server:update'])->accessToken;
-            return response([ 'user' => new UserResource(auth()->user()), 'status' => 200]);
+            //auth()->user()->createToken('authToken', ['server:update'])->accessToken;
+            return response([ 'user' => new UserResource(Auth::user()), 'status' => 200]);
         }
         return response(['message' => 'Неверные учетные данные']);
     }

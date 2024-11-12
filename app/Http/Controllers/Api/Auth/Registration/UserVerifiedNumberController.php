@@ -18,14 +18,14 @@ class UserVerifiedNumberController extends Controller
     public function verify(ValidateNumberRequest $request): Response
     {
         $validatedNumber = $request->validated();
-        $authUser = auth()->user();
+        $authUser = Auth::user();
         $authVerify = $authUser->verify;
 
-        if (Auth::user()->id == $authVerify->uid && $authVerify->number == $validatedNumber['number']) {
+        if (Auth::id() == $authVerify->uid && $authVerify->number == $validatedNumber['number']) {
 
             $authVerify->update(['verified' => true]);
 
-            return response(['userId' => auth()->user()->id, 'verified' => true]);
+            return response(['userId' => Auth::id(), 'verified' => true]);
         }
 
         return response(['verified' => false]);

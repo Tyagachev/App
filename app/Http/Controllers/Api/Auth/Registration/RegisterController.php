@@ -28,9 +28,9 @@ class RegisterController extends Controller
 
         $accessToken = $user->createToken('authToken')->accessToken;
 
-        if (auth()->user()) {
+        if (Auth::user()) {
 
-            $service->createVerifiedNumber(auth()->user());
+            $service->createVerifiedNumber(Auth::user());
 
             return response(['user' => $user, 'access_token' => $accessToken]);
         }
