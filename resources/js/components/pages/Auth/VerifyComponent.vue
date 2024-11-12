@@ -20,8 +20,7 @@
                         <div class="col-12">
                             <button @click.prevent="sendCode" class="btn btn-primary btn-block">Применить</button>
                         </div>
-                            <a v-if="this.localSecond === null" href="" @click.prevent="sendCodeAgain" class="link">Отправить код повторно</a>
-                        <span v-if="this.localSecond !== null">Повторная отправка через {{ localSecond }} c.</span>
+                        <TimerForSendCode />
                         <!-- /.col -->
                     </div>
                 </form>
@@ -36,55 +35,27 @@
 
 <script>
 import AdminLogo from "@/components/pages/Partials/AdminLogo.vue";
+import TimerForSendCode from "@/components/pages/Partials/TimerForSendCode.vue";
 export default {
     name: "VerifyComponent",
     components: {
+        TimerForSendCode,
         AdminLogo
     },
     data() {
         return {
             code: null,
-            second: 60,
-            localSecond: null
+
         }
     },
     mounted() {
         this.$store.dispatch('verifyModule/AUTH_USER_VERIFY');
-        this.checkTimer();
     },
     methods: {
         sendCode() {
             this.$store.dispatch('verifyModule/SEND_VERIFY_CODE', this.code);
         },
-        sendCodeAgain() {
-            this.$store.dispatch('verifyModule/SEND_CODE_AGAIN');
-            this.timer()
-        },
-        timer() {
 
-            if (localStorage.getItem('time') === null) {
-                localStorage.setItem('time', this.second);
-            }
-
-            const timer = setInterval(()=> {
-                this.localSecond = localStorage.getItem('time');
-                this.localSecond--
-                localStorage.setItem('time', this.localSecond);
-
-                if (this.localSecond === 0) {
-                    clearInterval(timer)
-                    localStorage.removeItem('time')
-                    this.localSecond = null
-                }
-            }, 1000)
-        },
-        checkTimer() {
-            this.localSecond = localStorage.getItem('time')
-            console.log(this.localSecond)
-            if (this.localSecond !== null) {
-                this.timer();
-            }
-        }
     },
     computed: {
         getVrf() {
