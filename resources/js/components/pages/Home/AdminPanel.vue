@@ -141,7 +141,7 @@ export default {
         this.$store.dispatch('authModule/AUTH_USER');
         setTimeout(() => {
             this.loading = false;
-        }, 800);
+        }, 0);
     },
     computed: {
         user() {

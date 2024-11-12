@@ -5,13 +5,18 @@
             Anything you want
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminAPP.io</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; {{ year }} <a href="https://adminlte.io">AdminAPP.io</a>.</strong> All rights reserved.
     </footer>
 </template>
 
 <script>
 export default {
-    name: "Footer"
+    name: "Footer",
+    data() {
+        return {
+            year: new Date().getUTCFullYear()
+        }
+    }
 }
 </script>
 
