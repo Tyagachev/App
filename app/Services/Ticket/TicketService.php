@@ -24,8 +24,26 @@ class TicketService
             $inArray = $answer + ['ticket_id' => $this->ticket->id];
             Answer::query()->create($inArray);
         }
-
         return true;
+    }
+
+    public function updateTicket($field )
+    {
+        $ticket = Ticket::query()->find($field['id']);
+        $ticket->update([
+            'title' => $field['title'],
+            'content' => $field['content']
+        ]);
+        foreach ($field['answers'] as $answer) {
+            try {
+                $update = $ticket->answers()->where('id', $answer['id']);
+                $answer['answer'] = str_replace(["\r\n", "\r", "\n"], "<br/>", $answer['answer']);
+                $update->update($answer);
+            } catch (\Exception) {
+                $update->create($answer);
+            }
+        }
+        return response('Updated', 200);
     }
 
     /**

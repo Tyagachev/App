@@ -15,4 +15,9 @@ class Answer extends Model
         'picked',
         'ticket_id',
     ];
+
+    protected $casts = [
+        'updated_at' => 'date:Y-m-d H:i:s',
+        'created_at' => 'date:Y-m-d H:i:s',
+    ];
 }

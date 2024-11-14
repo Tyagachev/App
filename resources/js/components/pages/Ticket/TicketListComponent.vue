@@ -77,18 +77,22 @@ export default {
         Search
     },
     mounted() {
-        this.$store.dispatch('ticketModule/TICKETS_LIST');
+        this.ticketList();
     },
     methods: {
+        ticketList() {
+            this.$store.dispatch('ticketModule/TICKETS_LIST');
+        },
         destroy(id) {
             axios.delete('/api/ticket/destroy/' + id).then(response => {
                 if (response.data === 'Destroy') {
-                    this.$store.dispatch('ticketModule/TICKETS_LIST');
+                    this.ticketList();
                 }
             });
         }
     },
     computed: {
+
         tickets() {
             return this.$store.getters['ticketModule/GET_TICKETS_LIST']
                 .filter(item => item.title.indexOf(this.$store.state.search) !== -1);

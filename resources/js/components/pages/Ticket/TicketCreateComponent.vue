@@ -10,7 +10,7 @@
     <div class="d-flex mt-2 justify-content-between">
         <div class="mb-3">
             <button @click="addAnswer" class="btn btn-info mb-1">
-                Добавить ответ <span v-if="form.answers.length > 0"> ({{ form.answers.length }})</span>
+                Добавить ответ <span v-if="form.answers.length"> ({{ form.answers.length }})</span>
             </button>
             <span></span>
         </div>
@@ -69,17 +69,22 @@ export default {
             errors: {}
         }
     },
+    mounted() {
+        this.clearStoreContent();
+    },
     methods: {
         addAnswer: function () {
             this.form.answers.push({ answer: '', picked: false});
         },
         deleteAnswer(index) {
-            console.log(index)
           this.form.answers.splice(index,1);
         },
         onSubmit() {
             this.$store.dispatch('ticketModule/SEND_CONTENT_TICKET', this.form)
-        }
+        },
+        clearStoreContent() {
+            this.$store.state.content = ''
+        },
     }
 }
 </script>

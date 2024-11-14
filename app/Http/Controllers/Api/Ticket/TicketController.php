@@ -9,6 +9,9 @@ use App\Services\Ticket\TicketService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
+/**
+ *
+ */
 class TicketController extends Controller
 {
 
@@ -52,19 +55,24 @@ class TicketController extends Controller
      * для редактирования
      *
      * @param string $id
-     * @return TicketResource
+     *
      */
-    public function edit(string $id): TicketResource
+    public function edit(string $id)
     {
-        return new TicketResource(Ticket::query()->find($id));
+        return response(new TicketResource(Ticket::query()->find($id))) ;
     }
 
+
     /**
-     * Update the specified resource in storage.
+     * Редактирование контента билета
+     *
+     * @param Request $request
+     * @param TicketService $service
+     * @return Response
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, TicketService $service): Response
     {
-        //
+        return $service->updateTicket($request->all());
     }
 
 

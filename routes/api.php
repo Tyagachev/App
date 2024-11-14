@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\Auth\Registration\RegisterController;
 use App\Http\Controllers\Api\Auth\Registration\UserVerifiedNumberController;
 use App\Http\Controllers\Api\Auth\Recover\RecoverController;
 use App\Http\Controllers\Api\Ticket\TicketController;
+use App\Http\Controllers\Api\Answer\AnswerController;
 use App\Http\Controllers\Api\Auth\Check\CheckController;
 
 Route::post('/register', [RegisterController::class, 'register']);
@@ -40,9 +41,12 @@ Route::group(['middleware' => 'logged:sanctum'], function () {
         Route::get('/list', [TicketController::class, 'index']);
         Route::post('/store', [TicketController::class, 'store']);
         Route::get('/edit/{id}', [TicketController::class, 'edit']);
+        Route::post('/update', [TicketController::class, 'update']);
         Route::delete('/destroy/{id}', [TicketController::class, 'destroy']);
     });
-
+    Route::prefix('answer')->group(function () {
+        Route::delete('/destroy/{id}', [AnswerController::class, 'destroy']);
+    });
     /**
      * Statistics
      **/

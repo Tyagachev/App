@@ -52,6 +52,7 @@ const mutations = {
      */
     SET_TICKET_INFO: (state, payload) => {
         state.ticket = payload;
+        store.state.content = payload.content
     }
 }
 
@@ -98,6 +99,19 @@ const actions = {
                 if (response.data === 'Created') {
                     window.location.replace('/ticket/list');
                 }
+        })
+    },
+    SEND_UPDATE_CONTENT_TICKET: (context, form) => {
+        axios.post('/api/ticket/update', {
+            id: form.id,
+            title: form.title,
+            content: store.state.content,
+            answers: form.answers
+        }).then( response => {
+            console.log(response);
+            /*if (response.data === 'Created') {
+                window.location.replace('/ticket/list');
+            }*/
         })
     }
 }
