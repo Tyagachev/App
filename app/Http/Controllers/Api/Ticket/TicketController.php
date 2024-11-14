@@ -55,9 +55,9 @@ class TicketController extends Controller
      * для редактирования
      *
      * @param string $id
-     *
+     *@return Response
      */
-    public function edit(string $id)
+    public function edit(string $id): Response
     {
         return response(new TicketResource(Ticket::query()->find($id))) ;
     }

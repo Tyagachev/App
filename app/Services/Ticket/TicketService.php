@@ -4,15 +4,16 @@ namespace App\Services\Ticket;
 
 use App\Models\Answer;
 use App\Models\Ticket;
+use Illuminate\Http\Response;
 
 class TicketService
 {
     protected object $ticket;
     /**
-     * @param $data
+     * @param array $data
      * @return boolean
      */
-    public function storeTicket($data): bool
+    public function storeTicket(array $data): bool
     {
         $this->ticket = Ticket::query()->create([
             'title' => $data['title'],
@@ -27,7 +28,11 @@ class TicketService
         return true;
     }
 
-    public function updateTicket($field )
+    /**
+     * @param array $field
+     * @return Response
+     */
+    public function updateTicket(array $field): Response
     {
         $ticket = Ticket::query()->find($field['id']);
         $ticket->update([

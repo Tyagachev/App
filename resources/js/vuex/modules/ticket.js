@@ -109,11 +109,11 @@ const actions = {
             answers: form.answers
         }).then( response => {
             console.log(response);
-            /*if (response.data === 'Created') {
+            if (response.data === 'Updated') {
                 window.location.replace('/ticket/list');
-            }*/
+            }
         })
-    }
+    },
 }
 
 export default {

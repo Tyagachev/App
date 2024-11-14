@@ -47,6 +47,6 @@ class RecoverController extends Controller
      */
     public function resetPassword(ChangePasswordRequest $request, RecoveryPasswordService $service): Response
     {
-        return $service->reset($request->validated());
+        return $service->updatedPassword($request->validated());
     }
 }

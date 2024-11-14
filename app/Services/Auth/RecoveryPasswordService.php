@@ -15,10 +15,10 @@ class RecoveryPasswordService
      * если запись была ранее была, то обновляет проверочный код
      *
      * @param array $email
-     * @return Response|void
+     * @return Response|null
      * @throws \Exception
      */
-    public function createRecoverNumber(array $email): Response
+    public function createRecoverNumber(array $email): Response|null
     {
         $user = User::query()->where('email', $email)->first();
 
@@ -36,6 +36,7 @@ class RecoveryPasswordService
             $sendNumber->sendRecoveryNumber( $user->email, $number);
 
             return response($user->email, 201);
+
         } elseif ($user && !$hasRecoveryNumber) {
             $sendNumber->sendRecoveryNumber($user->email, $number);
 
@@ -46,6 +47,7 @@ class RecoveryPasswordService
 
             return response($create, 201);
         }
+        return  null;
     }
 
     /**
@@ -74,7 +76,7 @@ class RecoveryPasswordService
      * @param array $data
      * @return Response
      */
-    public function reset(array $data): Response
+    public function updatedPassword(array $data): Response
     {
         User::query()
             ->where('email', '=', $data['email'])

@@ -72,11 +72,11 @@ class RegistrationService
     /**
      * Метод запуска экшена отправки письма с кодом
      *
-     * @param $user
-     * @param $createNumber
+     * @param object $user
+     * @param object $createNumber
      * @return void
      */
-    public function callActionSendMail($user, $createNumber): void
+    public function callActionSendMail(object $user, object$createNumber): void
     {
         $action = new SendMailVerifiedNumber();
         $action->sendMailVerify($user, $createNumber);

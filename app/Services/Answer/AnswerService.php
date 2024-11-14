@@ -13,8 +13,8 @@ class AnswerService
     /**
      * Сервис удаления ответа
      *
-     * @param $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Foundation\Application|\Illuminate\Http\Response
+     * @param string $id
+     * @return Response
      */
     public function destroyAnswer(string $id): Response
     {

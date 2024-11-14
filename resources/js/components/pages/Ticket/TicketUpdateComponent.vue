@@ -70,14 +70,13 @@ export default {
         addAnswer() {
             this.ticketInfo.answers.push({ answer: '', picked: false});
         },
-        deleteAnswer(id) {
-            axios.delete('/api/answer/destroy/' + id).then(response => {
-                console.log(response);
-                this.getTicketInfo();
-            });
-        },
         onSubmit() {
             this.$store.dispatch('ticketModule/SEND_UPDATE_CONTENT_TICKET', this.ticketInfo);
+        },
+        deleteAnswer(id) {
+            axios.delete('/api/answer/destroy/' + id).then(() => {
+                this.getTicketInfo();
+            });
         },
 
     },

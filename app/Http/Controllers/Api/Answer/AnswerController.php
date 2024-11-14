@@ -13,7 +13,7 @@ class AnswerController extends Controller
      *
      * @param string $id
      * @param AnswerService $service
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Foundation\Application|\Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(string $id, AnswerService $service): Response
     {
