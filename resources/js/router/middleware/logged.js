@@ -1,6 +1,6 @@
 export default function logged ({ next, store, nextMiddleware }){
-    console.log(store.getters.LOGGED);
-    if(store.getters.LOGGED.loggedIn){
+    const token = localStorage.getItem('x-xsrf-token')
+    if(store.getters.LOGGED.loggedIn && token){
         return next({
             path: '/admin'
         })

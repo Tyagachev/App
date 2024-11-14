@@ -9,6 +9,7 @@ import App from './components/App.vue'
 
 import router from './router'
 import store from './vuex/store';
+import axios from "axios";
 
 const app = createApp(App);
 

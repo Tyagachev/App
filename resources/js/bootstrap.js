@@ -12,6 +12,7 @@ import './adminLteJs/adminlte.min.js'
  */
 
 import axios from 'axios';
+import router from "./router/index.js";
 //window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 window.axios = axios;
@@ -21,9 +22,19 @@ window.axios.defaults.headers.common = {
     'X-Requested-With': 'XMLHttpRequest',
     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 };
-
-//window.axios.interceptors.response.use()
-
+axios.interceptors.response.use(function (response) {
+    return response;
+}, function (error)  {
+    if (error.response.status === 401 || error.response.status === 419) {
+        const token = localStorage.getItem('x_xsrf_token')
+        localStorage.removeItem('l')
+        if (token) {
+            localStorage.removeItem('x_xsrf_token')
+        }
+        router.push({name: 'login.page'})
+        return Promise.reject(error);
+    }
+});
 
 /**
  * Echo предоставляет расширенный API для подписки на каналы и прослушивания
