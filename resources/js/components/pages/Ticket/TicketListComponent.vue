@@ -1,14 +1,14 @@
 <template>
-        <div v-if="tickets.length === 0" >
-            <h4>Список билетов пуст</h4>
-        </div>
-        <div v-else-if="tickets.length !== 0">
-            <h4>Список билетов</h4>
-        </div>
         <div>
             <span style="color: #687;">Поиск по заголовку билета</span>
         </div>
     <Search />
+    <div v-if="tickets.length === 0" >
+        <h4>Список билетов пуст</h4>
+    </div>
+    <div v-else-if="tickets.length !== 0">
+        <h4>Список билетов</h4>
+    </div>
     <div class="pt-2 border-top border-black">
         <router-link :to="{name: 'ticket.create.page'}">
             <button class="btn btn-info mb-3" >
@@ -29,14 +29,9 @@
                     </button>
                 </router-link>
                 <div>
-                    <button @click="destroy(ticket.id)" type="button" class="btn btn-danger">
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"></path>
-                            </svg>
-                            Удалить
-                        </div>
-                    </button>
+                    <form @click="destroy(ticket.id)">
+                        <delete-button></delete-button>
+                    </form>
                 </div>
             </div>
             <div class="card card-primary" >
@@ -57,11 +52,8 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- /.card-body -->
-                <div class="card-footer" style="display: block;">
-
-                </div>
+                <div class="card-footer" style="display: block;"></div>
                 <!-- /.card-footer-->
             </div>
         </div>
@@ -71,9 +63,11 @@
 <script>
 
 import Search from "@/components/UI/Search/Search.vue";
+import DeleteButton from "@/components/UI/Button/DeleteButton.vue";
 export default {
     name: "TicketListComponent",
     components: {
+        DeleteButton,
         Search
     },
     mounted() {
@@ -84,15 +78,12 @@ export default {
             this.$store.dispatch('ticketModule/TICKETS_LIST');
         },
         destroy(id) {
-            axios.delete('/api/ticket/destroy/' + id).then(response => {
-                if (response.data === 'Destroy') {
-                    this.ticketList();
-                }
-            });
+            axios.delete('/api/ticket/destroy/' + id).then(() => {
+                this.ticketList();
+            })
         }
     },
     computed: {
-
         tickets() {
             return this.$store.getters['ticketModule/GET_TICKETS_LIST']
                 .filter(item => item.title.indexOf(this.$store.state.search) !== -1);

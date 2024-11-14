@@ -124,7 +124,7 @@ export default {
         back() {
             location.reload();
         }
-    },
+    }
 }
 </script>
 

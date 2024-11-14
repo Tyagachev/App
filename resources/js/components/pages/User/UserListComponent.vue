@@ -1,11 +1,5 @@
 <template>
     <div>
-        <div v-if="users.length === 0" >
-            <h4>Список пользователей пуст</h4>
-        </div>
-        <div v-else-if="users.length !== 0">
-            <h4>Список пользователей</h4>
-        </div>
         <div>
             <div class="">
                 <span style="color: #687;">Поиск по имени или email</span>
@@ -16,7 +10,22 @@
 
     </div>
     <Search />
+    <div v-if="users.length === 0" >
+        <h4>Список пользователей пуст</h4>
+    </div>
+    <div v-else-if="users.length !== 0">
+        <h4>Список пользователей</h4>
+    </div>
     <div class="pt-2 border-top border-black">
+        <router-link :to="{name: 'user.create.page'}">
+            <button class="btn btn-info mb-3" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 20 20">
+                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"/>
+                </svg>
+                Добавить юзера
+            </button>
+        </router-link>
         <div class="row">
             <div v-for="user in users" :key="user.id" class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
             <div class="card bg-light d-flex flex-fill">
