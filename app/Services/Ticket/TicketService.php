@@ -8,21 +8,20 @@ use Illuminate\Http\Response;
 
 class TicketService
 {
-    protected object $ticket;
     /**
      * @param array $data
      * @return boolean
      */
     public function storeTicket(array $data): bool
     {
-        $this->ticket = Ticket::query()->create([
+        $ticket = Ticket::query()->create([
             'title' => $data['title'],
             'content' => $data['content']
         ]);
 
         foreach ($data['answers'] as $answer) {
             $answer['answer'] = str_replace(["\r\n", "\r", "\n"], "<br/>", $answer['answer']);
-            $inArray = $answer + ['ticket_id' => $this->ticket->id];
+            $inArray = $answer + ['ticket_id' => $ticket->id];
             Answer::query()->create($inArray);
         }
         return true;

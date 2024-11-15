@@ -76,7 +76,7 @@ class RegistrationService
      * @param object $createNumber
      * @return void
      */
-    public function callActionSendMail(object $user, object$createNumber): void
+    private function callActionSendMail(object $user, object$createNumber): void
     {
         $action = new SendMailVerifiedNumber();
         $action->sendMailVerify($user, $createNumber);

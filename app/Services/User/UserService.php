@@ -5,6 +5,7 @@ namespace App\Services\User;
 use App\Actions\Auth\User\SendMailUserCredentials;
 use App\Models\User;
 use App\Models\UserVerifiedNumber;
+use Exception;
 use Illuminate\Support\Str;
 
 class UserService
@@ -60,31 +61,32 @@ class UserService
      * @param array $data
      * @return bool
      */
-    public function createRole(object $user, array $data): bool
+    private function createRole(object $user, array $data): bool
     {
         $user->role()->create([
             'uid' => $user->id,
             'role' => $data['role']
         ]);
-
         return true;
     }
 
     /**
-     * Добавление в БД запись о проверочном коде
+     * Создание проверочного кода
      *
      * @param object $user
-     * @return bool
-     * @throws \Exception
+     * @return \Exception|true
      */
-    public function createVerifiedNumber(object $user): bool
+    private function createVerifiedNumber(object $user): Exception|true
     {
-        UserVerifiedNumber::query()->create([
-            'uid' => $user->id,
-            'number' => random_int(111111, 999999),
-            'verified' => true
-        ]);
-
-        return true;
+        try {
+            UserVerifiedNumber::query()->create([
+                'uid' => $user->id,
+                'number' => random_int(111111, 999999),
+                'verified' => true
+            ]);
+            return true;
+        } catch (\Exception $e) {
+            return $e;
+        }
     }
 }
