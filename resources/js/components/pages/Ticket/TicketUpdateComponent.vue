@@ -1,5 +1,4 @@
 <template>
-    {{ ticketInfo }}
     <div class="form-group">
         <label for="exampleInputName">Заголовок<span class="text-danger">*</span></label>
         <input v-model="ticketInfo.title" type="text" class="form-control" id="exampleInputName" placeholder="Заголовок" required>
@@ -20,20 +19,21 @@
             </form>
         </div>
     </div>
-
+    {{ticketInfo}}
     <div v-for="(ticket, index) in ticketInfo.answers" :key="ticket.id">
         <div class="form-group">
             <label for="exampleInputName">Ответ {{ index + 1 }}</label>
             <div class="d-flex justify-content-between">
                 <div>
                     <label class="toggle">
-                        <input :key="ticket.id" class="toggle-checkbox" type="checkbox" v-model="ticket.picked" :checked="ticket.picked" :value="ticket.picked" role="switch" id="flexSwitchCheckDefault">
+                        <input :key="ticket.id" class="toggle-checkbox" type="checkbox"  :checked="ticket.picked"
+                               role="switch" id="flexSwitchCheckDefault">
                         <div class="toggle-switch"></div>
                         <span class="toggle-label">Верный ответ</span>
                     </label>
                 </div>
                 <div>
-                    <form @click.prevent="deleteAnswer(ticket.id)">
+                    <form @click.prevent="deleteAnswer(index,ticket.id)">
                         <delete-button></delete-button>
                     </form>
 
@@ -48,12 +48,18 @@
 import Editor from "@/components/pages/Home/Editor.vue";
 import DeleteButton from "@/components/UI/Button/DeleteButton.vue";
 import SaveButton from "@/components/UI/Button/SaveButton.vue";
+import ticket from "@/vuex/modules/ticket.js";
 export default {
     name: "TicketUpdateComponent",
     components: {
         SaveButton,
         DeleteButton,
         Editor
+    },
+    data() {
+        return {
+            checked:{}
+        }
     },
     mounted() {
         this.getTicketInfo()
@@ -69,12 +75,15 @@ export default {
         onSubmit() {
             this.$store.dispatch('ticketModule/SEND_UPDATE_CONTENT_TICKET', this.ticketInfo);
         },
-        deleteAnswer(id) {
-            axios.delete('/api/answer/destroy/' + id).then(() => {
-                this.getTicketInfo();
-            });
+        deleteAnswer(index,id) {
+            if (id === undefined) {
+                this.ticketInfo.answers.splice(index,1)
+            } else {
+                axios.delete('/api/answer/destroy/' + id).then(() => {
+                    this.getTicketInfo();
+                });
+            }
         },
-
     },
     computed: {
         ticketInfo() {

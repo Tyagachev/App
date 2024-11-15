@@ -47,7 +47,7 @@
                     <b>Варианты ответов:</b>
                     <div v-for="answer in ticket.answers" :key="answer.id">
                         <div class="border border-black p-2">
-                            <input :key="answer.id"  type="checkbox" :checked="answer.picked" role="switch">
+                            <input :key="answer.id"  type="checkbox" :checked="answer.picked" disabled role="switch">
                             <span v-html="answer.answer" class="pl-2"></span>
                         </div>
                     </div>
