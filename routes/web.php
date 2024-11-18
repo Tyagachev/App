@@ -17,6 +17,7 @@ Route::get('/clear', function() {
    return "Cleared!";
 
 });
+
 Route::get('/migrate', function() {
     Artisan::call('migrate',
         [
