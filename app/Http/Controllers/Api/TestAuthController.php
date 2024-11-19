@@ -3,16 +3,30 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\User\UserResource;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class   TestAuthController extends Controller
+class TestAuthController extends Controller
 {
-    public function test($id)
+    public int $id = 1;
+    private string $host = 'localhost';
+    private string $dbName = 'app';
+    private string $userName = 'root';
+    private string $password = '';
+    public function test()
     {
-        $user = User::query()->findOrFail($id);
-        return response(new UserResource($user));
+        $connect = mysqli_connect(
+            "$this->host",
+            "$this->userName",
+            "$this->password",
+            "$this->dbName");
+
+        $sql = "SELECT name, email, created_at FROM users WHERE id = $this->id";
+
+        $res = mysqli_query($connect, $sql)->fetch_object();
+
+        return json_encode($res);
     }
+
 }
+
+
+
