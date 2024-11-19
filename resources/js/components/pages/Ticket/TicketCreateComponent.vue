@@ -38,7 +38,7 @@
                     </form>
                 </div>
             </div>
-            <textarea v-text="" v-model="el.answer" :key="index" type="text" class="form-control"></textarea>
+            <textarea v-text="" v-model="el.answer" :key="index" type="text" class="form-control" required></textarea>
         </div>
     </div>
 </template>

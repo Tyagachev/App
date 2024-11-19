@@ -7,7 +7,6 @@ use App\Http\Requests\Ticket\TicketRequest;
 use App\Http\Resources\Ticket\TicketResource;
 use App\Models\Ticket;
 use App\Services\Ticket\TicketService;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 /**
@@ -23,9 +22,8 @@ class TicketController extends Controller
      */
     public function index(): Response
     {
-        return response(TicketResource::collection(Ticket::all()));
+        return response(TicketResource::collection(Ticket::all()->sortByDesc('created_at')));
     }
-
 
     /**
      * Добавление билетов и вопросов к ним
