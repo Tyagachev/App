@@ -96,11 +96,21 @@ const actions = {
             content: store.state.content,
             answers: form.answers
         }).then( response => {
-                if (response.data === 'Created') {
+            console.log(response);
+            if (response.status === 201) {
                     window.location.replace('/ticket/list');
                 }
+        }).catch(err => {
+            console.log(err.response);
         })
     },
+    /**
+     * Обновление контента билета
+     *
+     * @param context
+     * @param form
+     * @constructor
+     */
     SEND_UPDATE_CONTENT_TICKET: (context, form) => {
         axios.post('/api/ticket/update', {
             id: form.id,
@@ -108,8 +118,7 @@ const actions = {
             content: store.state.content,
             answers: form.answers
         }).then( response => {
-            console.log(response);
-            if (response.data === 'Updated') {
+            if (response.status === 200) {
                 window.location.replace('/ticket/list');
             }
         })
