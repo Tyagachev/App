@@ -26,9 +26,11 @@ class TicketController extends Controller
         return response(TicketResource::collection(Ticket::all()));
     }
 
+
     /**
      * Добавление билетов и вопросов к ним
      *
+     * @param TicketRequest $request
      * @param TicketService $service
      * @return Response
      */
@@ -66,15 +68,14 @@ class TicketController extends Controller
     /**
      * Редактирование контента билета
      *
-     * @param Request $request
+     * @param TicketRequest $request
      * @param TicketService $service
      * @return Response
      */
-    public function update(Request $request, TicketService $service): Response
+    public function update(TicketRequest $request, TicketService $service): Response
     {
         return $service->updateTicket($request->all());
     }
-
 
     /**
      * Удаление билета
