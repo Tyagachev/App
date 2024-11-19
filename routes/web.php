@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\TestAuthController;
 
 
 Auth::routes();
@@ -28,6 +29,8 @@ Route::get('/migrate', function() {
 
     return "Migrate";
 });
+
+Route::get('/test', [TestAuthController::class, 'test']);
 
 Route::get('/migrate/fresh', function() {
     Artisan::call('migrate:fresh');
