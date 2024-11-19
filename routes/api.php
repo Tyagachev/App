@@ -4,8 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\User\UserController;
 use App\Http\Controllers\Api\Generate\GenerateController;
 use App\Http\Controllers\Api\Statistics\StatisticsController;
-
-
 use App\Http\Controllers\Api\Ticket\TicketController;
 use App\Http\Controllers\Api\Answer\AnswerController;
 use App\Http\Controllers\Api\Auth\Check\CheckController;
