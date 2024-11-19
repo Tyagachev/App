@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Ticket;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Ticket\TicketRequest;
 use App\Http\Resources\Ticket\TicketResource;
 use App\Models\Ticket;
 use App\Services\Ticket\TicketService;
@@ -28,18 +29,17 @@ class TicketController extends Controller
     /**
      * Добавление билетов и вопросов к ним
      *
-     * @param Request $request
      * @param TicketService $service
      * @return Response
      */
-    public function store(Request $request, TicketService $service): Response
+    public function store(TicketRequest $request, TicketService $service): Response
     {
-        if ($service->storeTicket($request->all())) {
+        if ($service->storeTicket($request->validated())) {
 
             return response('Created', 201);
         }
 
-        return response('Error');
+        return response(404);
     }
 
     /**
