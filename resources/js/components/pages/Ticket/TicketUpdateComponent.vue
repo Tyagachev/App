@@ -19,7 +19,6 @@
             </form>
         </div>
     </div>
-    {{ticketInfo}}
     <div v-for="(ticket, index) in ticketInfo.answers" :key="ticket.id">
         <div class="form-group">
             <label for="exampleInputName">Ответ {{ index + 1 }}</label>
@@ -33,7 +32,7 @@
                     </label>
                 </div>
                 <div>
-                    <form @click.prevent="deleteAnswer(index,ticket.id)">
+                    <form v-if="ticketInfo.answers.length > 1" @click.prevent="deleteAnswer(index,ticket.id)">
                         <delete-button></delete-button>
                     </form>
 
