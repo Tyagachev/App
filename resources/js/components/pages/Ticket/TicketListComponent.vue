@@ -7,7 +7,7 @@
         <h4>Список билетов пуст</h4>
     </div>
     <div v-else-if="tickets.length !== 0">
-        <h4>Список билетов</h4>
+        <h5>Кол-во билетов: {{tickets.length}}</h5>
     </div>
     <div class="pt-2 border-top border-black">
         <router-link :to="{name: 'ticket.create.page'}">

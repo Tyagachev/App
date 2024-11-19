@@ -14,7 +14,7 @@
         <h4>Список пользователей пуст</h4>
     </div>
     <div v-else-if="users.length !== 0">
-        <h4>Список пользователей</h4>
+        <h5>Кол-во пользователей: {{users.length}}</h5>
     </div>
     <div class="pt-2 border-top border-black">
         <router-link :to="{name: 'user.create.page'}">
