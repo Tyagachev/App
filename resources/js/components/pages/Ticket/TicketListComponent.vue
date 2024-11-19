@@ -29,7 +29,7 @@
                     </button>
                 </router-link>
                 <div>
-                    <form @click="destroy(ticket.id)">
+                    <form @click.prevent="destroy(ticket.id)">
                         <delete-button></delete-button>
                     </form>
                 </div>
