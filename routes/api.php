@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Generate\GenerateController;
 use App\Http\Controllers\Api\Statistics\StatisticsController;
 use App\Http\Controllers\Api\Ticket\TicketController;
 use App\Http\Controllers\Api\Answer\AnswerController;
+use App\Http\Controllers\Api\Task\TaskController;
 use App\Http\Controllers\Api\Auth\Check\CheckController;
 
 Route::group(['middleware' => 'logged:sanctum'], function () {
@@ -17,6 +18,17 @@ Route::group(['middleware' => 'logged:sanctum'], function () {
         Route::get('/list', [UserController::class, 'index']);
         Route::get('/show/{id}', [UserController::class, 'show']);
         Route::post('/create', [UserController::class, 'store']);
+    });
+
+    /**
+     * Check
+     *
+     * Контроллер проверки на авторизацию пользователя
+     * и получения данных о пользователе
+     **/
+    Route::prefix('check')->group(function () {
+        Route::get('/auth/user', [CheckController::class, 'authUser']);
+        Route::get('/logged/checked', [CheckController::class, 'authCheck']);
     });
 
     /**
@@ -38,6 +50,15 @@ Route::group(['middleware' => 'logged:sanctum'], function () {
     });
 
     /**
+     * Task
+     **/
+    Route::prefix('task')->group(function () {
+        Route::post('/index', [TaskController::class, 'index']);
+        Route::post('/store', [TaskController::class, 'store']);
+        Route::get('/show/{id}', [TaskController::class, 'show']);
+    });
+
+    /**
      * Statistics
      **/
     Route::prefix('statistics')->group(function () {
@@ -46,23 +67,16 @@ Route::group(['middleware' => 'logged:sanctum'], function () {
     });
 
     /**
-     * Check
-     *
-     * Контроллер проверки на авторизацию пользователя
-     * и получения данных о пользователе
-     **/
-    Route::prefix('check')->group(function () {
-        Route::get('/auth/user', [CheckController::class, 'authUser']);
-        Route::get('/logged/checked', [CheckController::class, 'authCheck']);
-    });
-
-    /**
      * Generate
      **/
     Route::post('/generate-password', [GenerateController::class, 'create']);
     Route::get('/test/{id}', [\App\Http\Controllers\Api\TestAuthController::class, 'test'])->name('test');
-
 });
+
+
+
+
+
 
 require_once (__DIR__ . '/auth.php');
 

@@ -4,6 +4,8 @@ namespace App\Models;
 
 //use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -13,7 +15,11 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    /**
+     * @var string
+     */
     protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -45,6 +51,9 @@ class User extends Authenticatable
         'password' => 'hashed'
     ];
 
+    /**
+     * @return HasOne
+     */
     public function role(): HasOne
     {
         return $this->hasOne(Role::class, 'uid', 'id');
@@ -56,4 +65,13 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserVerifiedNumber::class, 'uid', 'id');
     }
+
+    /**
+     * @return HasMany
+     */
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
+    }
+
 }

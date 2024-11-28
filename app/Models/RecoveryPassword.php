@@ -9,7 +9,14 @@ class RecoveryPassword extends Model
 {
     use HasFactory;
 
+    /**
+     * @var string
+     */
     protected $table = 'recovery_passwords';
+
+    /**
+     * @var string[]
+     */
     protected $fillable = [
         'email',
         'number'

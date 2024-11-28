@@ -45,6 +45,10 @@ const actions = {
     AUTH_USER: (context) => {
         axios.get('/api/check/auth/user').then(response => {
             context.commit('SET_AUTH_USER', response.data);
+        }).catch(error => {
+            if (error) {
+                window.location.replace('/log')
+            }
         });
     },
     /**

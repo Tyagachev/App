@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Task;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class TestAuthController extends Controller
 {
@@ -26,7 +29,25 @@ class TestAuthController extends Controller
         return json_encode($res);
     }
 
+    public function test2(Request $request)
+    {
+        /*$data = [
+            'ticket_id' => 1,
+            'answer_id' => 1,
+            'user_id' => 1
+        ];
+        $user =  User::query()->where('id', $data['user_id'])->first();
+        $user->tasks()->create($data);*/
+        $task = Task::query()
+            ->select('tickets.content','answers.answer','answers.answer', 'answers.picked')
+            ->join('tickets', 'tickets.id', '=' ,'tasks.ticket_id')
+            ->join('answers', 'answers.id', '=', 'tasks.answer_id')
+            ->join('users', 'users.id','=', 'tasks.user_id')
+            ->where('tasks.user_id', '=', 1)->get();
+        dd($task);
+    }
 }
+
 
 
 

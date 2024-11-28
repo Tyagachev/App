@@ -113,7 +113,7 @@ export default {
                     'underline',
                     '|',
                     'link',
-                    //'insertImage',
+                    'insertImage',
                     'insertTable',
                     '|',
                     'alignment',

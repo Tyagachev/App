@@ -7,15 +7,14 @@
             <!-- Main Sidebar Container -->
             <aside class="main-sidebar sidebar-dark-primary elevation-4" style="position: fixed;">
                 <!-- Brand Logo -->
-                <router-link :to="{name:'admin.page'}">
+                <!--<router-link :to="{name:'admin.page'}">
                 <a href="" class="brand-link">
                     <div class="d-flex justify-content-center">
                         <span class="brand-text font-weight-light">AdminAPP</span>
                     </div>
-                    <!--<img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">-->
                 </a>
-                </router-link>
-
+                </router-link>-->
+                <!--<img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">-->
                 <!-- Sidebar -->
                 <div class="sidebar">
                     <!-- Sidebar user panel (optional) -->

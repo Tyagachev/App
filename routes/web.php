@@ -31,6 +31,7 @@ Route::get('/migrate', function() {
 });
 
 Route::get('/test', [TestAuthController::class, 'test']);
+Route::get('/test2', [TestAuthController::class, 'test2']);
 
 Route::get('/migrate/fresh', function() {
     Artisan::call('migrate:fresh');

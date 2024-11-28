@@ -96,6 +96,12 @@ const routes = [
             components: {
                 page: () => import('../components/pages/User/UserProfileComponent.vue')
             }
+        },{
+            path: '/task/:id?',
+            name: 'task.page',
+            components: {
+                page: () => import('../components/pages/Task/TaskComponent.vue')
+            }
         }],
     },
 ]

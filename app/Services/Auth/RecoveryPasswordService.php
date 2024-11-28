@@ -29,16 +29,17 @@ class RecoveryPasswordService
         $hasRecoveryNumber = RecoveryPassword::query()->where('email', $user->email)->first();
 
         $number = random_int(111111, 999999);
-        $sendNumber = new SendMailRecoveryNumber();
+
 
         if ($user && $hasRecoveryNumber) {
             $hasRecoveryNumber->update(['number' => $number]);
-            $sendNumber->sendRecoveryNumber( $user->email, $number);
+            $this->sendMail($user->email, $number);
 
             return response($user->email, 201);
 
         } elseif ($user && !$hasRecoveryNumber) {
-            $sendNumber->sendRecoveryNumber($user->email, $number);
+
+            $this->sendMail($user->email, $number);
 
             $create = RecoveryPassword::query()->create([
                 'email' => $user->email,
@@ -83,5 +84,11 @@ class RecoveryPasswordService
             ->update(['password' => Hash::make($data['password'])]);
 
         return response('Updated', 201);
+    }
+
+    private function sendMail(string $mail, int $number): void
+    {
+        $sendNumber = new SendMailRecoveryNumber();
+        $sendNumber->sendRecoveryNumber($mail, $number);
     }
 }

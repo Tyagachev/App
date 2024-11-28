@@ -6,24 +6,29 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class UserVerifiedNumber extends Model
+class Task extends Model
 {
     use HasFactory;
 
     /**
-     * @var array
-     */
-    protected $guarded = [];
-
-    /**
      * @var string
      */
-    protected $table = 'user_verified_numbers';
+    protected $table = 'tasks';
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @var bool
      */
-    public function user(): BelongsTo
+    protected $guarded = false;
+
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
+     * @return BelongsTo
+     */
+    public function usersFinished(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

@@ -25,12 +25,16 @@ window.axios.defaults.headers.common = {
 axios.interceptors.response.use(function (response) {
     return response;
 }, function (error)  {
+
     if (error.response.status === 401 || error.response.status === 419) {
         const token = localStorage.getItem('x_xsrf_token')
         localStorage.removeItem('l')
+        localStorage.removeItem('uid')
+
         if (token) {
             localStorage.removeItem('x_xsrf_token')
         }
+
         router.push({name: 'login.page'})
         return Promise.reject(error);
     }
