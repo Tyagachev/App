@@ -1,8 +1,14 @@
 <template>
     <div>
-        <div v-for="res in result">
-            <p v-html="res.content"></p>
-            <p>{{}}</p>
+        <div v-if="result.length === 0">
+            <h3 class="text-center">Вы ответили на все вопросы!</h3>
+        </div>
+        <div v-if="result.length">
+            <button @click.prevent="again()" class=" btn btn-danger">Пройти тест заново</button>
+            <div v-for="res in result">
+                <p>{{ res.title }}</p>
+                <p v-html="res.content"></p>
+            </div>
         </div>
         <div v-for="task in tasks" :key="task.id">
             <div class="card card-primary mb-0 mt-3" >
@@ -26,7 +32,6 @@
                         </div>
                 </div>
             </div>
-
         </div>
     </div>
 </template>
@@ -80,6 +85,13 @@ export default {
           axios.get('/api/task/show/' + this.user.id).then(response => {
               this.result = response.data
           });
+        },
+        again() {
+            axios.post('/api/task/destroy', {id: this.user.id}).then(response => {
+                if (response.status === 200) {
+                    window.location.reload()
+                }
+            });
         },
         onChange(answer) {
             this.form.user_id = this.user.id
