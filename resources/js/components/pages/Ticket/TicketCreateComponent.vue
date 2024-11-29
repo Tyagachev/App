@@ -25,9 +25,9 @@
         <div class="form-group">
             <label for="exampleInputName">Ответ {{ index + 1 }}</label>
             <div class="d-flex justify-content-between">
-                <div>
-                    <label class="toggle">
-                        <input :key="index" class="toggle-checkbox" type="checkbox" v-model="el.picked" role="switch" id="flexSwitchCheckDefault">
+                <div class="form_radio">
+                     <label :for="index" class="toggle">
+                        <input :key="index" class="toggle-checkbox" type="checkbox" v-model="el.picked" :checked="el.picked" role="switch" :id="index">
                         <div class="toggle-switch"></div>
                         <span class="toggle-label">Верный ответ</span>
                     </label>
@@ -38,7 +38,7 @@
                     </form>
                 </div>
             </div>
-            <textarea v-text="" v-model="el.answer" :key="index" type="text" class="form-control" required></textarea>
+            <textarea  v-model="el.answer" :key="index" type="text" class="form-control" required></textarea>
         </div>
     </div>
 </template>
@@ -84,6 +84,5 @@ export default {
 </script>
 
 <style scoped>
-
 
 </style>

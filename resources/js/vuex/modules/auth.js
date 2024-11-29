@@ -47,6 +47,8 @@ const actions = {
             context.commit('SET_AUTH_USER', response.data);
         }).catch(error => {
             if (error) {
+                localStorage.clear();
+                sessionStorage.clear();
                 window.location.replace('/log')
             }
         });

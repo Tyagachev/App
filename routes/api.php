@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Hint\HintController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\User\UserController;
 use App\Http\Controllers\Api\Generate\GenerateController;
@@ -42,6 +43,10 @@ Route::group(['middleware' => 'logged:sanctum'], function () {
         Route::delete('/destroy/{id}', [TicketController::class, 'destroy']);
     });
 
+    Route::prefix('hint')->group(function () {
+        Route::get('/index', [HintController::class, 'index']);
+    });
+
     /**
      * Answer
      **/
@@ -56,6 +61,7 @@ Route::group(['middleware' => 'logged:sanctum'], function () {
         Route::post('/index', [TaskController::class, 'index']);
         Route::post('/store', [TaskController::class, 'store']);
         Route::get('/show/{id}', [TaskController::class, 'show']);
+        Route::post('/destroy', [TaskController::class, 'destroy']);
     });
 
     /**

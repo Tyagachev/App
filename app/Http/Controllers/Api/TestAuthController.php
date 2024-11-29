@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Task;
+use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -38,13 +39,17 @@ class TestAuthController extends Controller
         ];
         $user =  User::query()->where('id', $data['user_id'])->first();
         $user->tasks()->create($data);*/
-        $task = Task::query()
+        /*$task = Task::query()
             ->select('tickets.content','answers.answer','answers.answer', 'answers.picked')
             ->join('tickets', 'tickets.id', '=' ,'tasks.ticket_id')
             ->join('answers', 'answers.id', '=', 'tasks.answer_id')
             ->join('users', 'users.id','=', 'tasks.user_id')
             ->where('tasks.user_id', '=', 1)->get();
-        dd($task);
+        dd($task);*/
+        $ticket = Ticket::query()->find(3);
+        if (sizeof($ticket->answers) === 0) {
+            $ticket->delete();
+        }
     }
 }
 

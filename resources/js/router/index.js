@@ -67,6 +67,12 @@ const routes = [
                 page: () => import('../components/pages/Ticket/TicketCreateComponent.vue')
             }
         },{
+            path: '/hint',
+            name: 'hint.create.page',
+            components: {
+                page: () => import('../components/pages/Ticket/Hint/HintCreateComponent.vue')
+            }
+        },{
             path: '/ticket/edit/:id?',
             name: 'ticket.edit.page',
             components: {

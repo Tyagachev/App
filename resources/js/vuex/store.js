@@ -2,10 +2,11 @@ import { createStore } from 'vuex'
 
 import user from '../vuex/modules/user.js';
 import auth from '../vuex/modules/auth.js'
-import verify from "../vuex/modules/verify.js";
-import statistics from "../vuex/modules/statistics.js";
-import ticket from "../vuex/modules/ticket.js"
-import axios from "axios";
+import verify from '../vuex/modules/verify.js';
+import statistics from '../vuex/modules/statistics.js';
+import ticket from '../vuex/modules/ticket.js'
+import hint from '../vuex/modules/hint.js'
+import axios from 'axios';
 
 const store = createStore({
      state: {
@@ -55,7 +56,8 @@ const store = createStore({
         authModule: auth,
         verifyModule: verify,
         statisticsModule: statistics,
-        ticketModule: ticket
+        ticketModule: ticket,
+        hintModule: hint
     },
 
 })

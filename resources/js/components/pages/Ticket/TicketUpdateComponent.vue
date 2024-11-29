@@ -25,7 +25,7 @@
             <div class="d-flex justify-content-between">
                 <div>
                     <label class="toggle">
-                        <input :key="ticket.id" class="toggle-checkbox" type="checkbox"  :checked="ticket.picked"
+                        <input :key="ticket.id" class="toggle-checkbox" type="checkbox" @change="onChange(ticket.picked)" :checked="ticket.picked"
                                role="switch" id="flexSwitchCheckDefault">
                         <div class="toggle-switch"></div>
                         <span class="toggle-label">Верный ответ</span>
@@ -57,11 +57,13 @@ export default {
     },
     data() {
         return {
-            checked:{}
+            checked:{},
+            picked: ''
         }
     },
     mounted() {
         this.getTicketInfo()
+        this.onChange();
 
     },
     methods: {
@@ -83,6 +85,10 @@ export default {
                 });
             }
         },
+        onChange(p) {
+            this.picked = p;
+            console.log(this.picked);
+        }
     },
     computed: {
         ticketInfo() {

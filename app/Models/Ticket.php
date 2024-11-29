@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Ticket extends Model
 {
@@ -26,6 +27,14 @@ class Ticket extends Model
     public function answers(): HasMany
     {
         return $this->hasMany(Answer::class, 'ticket_id', 'id');
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function hint(): HasOne
+    {
+        return $this->hasOne(Hint::class);
     }
 
     /**

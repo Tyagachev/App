@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Ticket;
+namespace App\Http\Resources\Hint;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TicketResource extends JsonResource
+class HintResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +16,8 @@ class TicketResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => $this->title,
-            'content' => $this->content,
-            'answers' => $this->answers,
+            'hint' => $this->hint,
+            'ticket' => $this->ticket
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Services\Ticket;
 
 use App\Models\Answer;
+use App\Models\Hint;
 use App\Models\Ticket;
 use Illuminate\Http\Response;
 
@@ -19,11 +20,15 @@ class TicketService
             'content' => $data['content']
         ]);
 
+        $this->addTicketIdToHint($ticket);
+
         foreach ($data['answers'] as $answer) {
             $answer['answer'] = str_replace(["\r\n", "\r", "\n"], "<br/>", $answer['answer']);
             $inArray = $answer + ['ticket_id' => $ticket->id];
             Answer::query()->create($inArray);
         }
+
+
         return true;
     }
 
@@ -59,8 +64,18 @@ class TicketService
     public function destroyTicket(int $id): bool
     {
         $ticket = Ticket::query()->find($id);
+        if (empty($ticket->answers)) {
+            $ticket->delete();
+        }
         $ticket->answers()->delete();
 
         return $ticket->delete();
+    }
+
+    private function addTicketIdToHint(object $ticket): void
+    {
+        $hint = new Hint();
+        $hint->ticket_id = $ticket->id;
+        $ticket->hint()->save($hint);
     }
 }

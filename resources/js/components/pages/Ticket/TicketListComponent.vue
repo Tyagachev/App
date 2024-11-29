@@ -32,7 +32,7 @@
                     <b>Варианты ответов:</b>
                     <div v-for="answer in ticket.answers" :key="answer.id">
                         <div class="border border-black p-2">
-                            <input :key="answer.id"  type="checkbox" :checked="answer.picked" disabled role="switch">
+                            <input :key="answer.id"  type="radio" :checked="answer.picked" disabled role="switch">
                             <span v-html="answer.answer" class="pl-2"></span>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                 <div class="card-footer" style="display: block;"></div>
                 <!-- /.card-footer-->
             </div>
-            <div class="d-flex justify-content-between mb-1">
+            <div class="d-flex justify-content-between mb-1 mt-1">
                 <router-link :to="{name: 'ticket.edit.page', params: {id: ticket.id}}">
                     <button class="btn btn-info mr-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
@@ -56,6 +56,7 @@
                     </form>
                 </div>
             </div>
+            <hr>
         </div>
     </div>
 </template>
