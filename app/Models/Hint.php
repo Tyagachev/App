@@ -10,6 +10,8 @@ class Hint extends Model
 {
     use HasFactory;
 
+    protected $guarded = false;
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

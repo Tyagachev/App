@@ -87,7 +87,6 @@ export default {
         },
         onChange(p) {
             this.picked = p;
-            console.log(this.picked);
         }
     },
     computed: {

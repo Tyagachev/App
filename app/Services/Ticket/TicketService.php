@@ -75,6 +75,7 @@ class TicketService
     private function addTicketIdToHint(object $ticket): void
     {
         $hint = new Hint();
+        $hint->hint = '...';
         $hint->ticket_id = $ticket->id;
         $ticket->hint()->save($hint);
     }

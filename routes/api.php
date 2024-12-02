@@ -10,6 +10,8 @@ use App\Http\Controllers\Api\Answer\AnswerController;
 use App\Http\Controllers\Api\Task\TaskController;
 use App\Http\Controllers\Api\Auth\Check\CheckController;
 
+require_once (__DIR__ . '/Auth/auth.php');
+
 Route::group(['middleware' => 'logged:sanctum'], function () {
 
     /**
@@ -43,8 +45,12 @@ Route::group(['middleware' => 'logged:sanctum'], function () {
         Route::delete('/destroy/{id}', [TicketController::class, 'destroy']);
     });
 
+    /**
+     * Hint
+     **/
     Route::prefix('hint')->group(function () {
         Route::get('/index', [HintController::class, 'index']);
+        Route::post('/update', [HintController::class, 'update']);
     });
 
     /**
@@ -78,12 +84,5 @@ Route::group(['middleware' => 'logged:sanctum'], function () {
     Route::post('/generate-password', [GenerateController::class, 'create']);
     Route::get('/test/{id}', [\App\Http\Controllers\Api\TestAuthController::class, 'test'])->name('test');
 });
-
-
-
-
-
-
-require_once (__DIR__ . '/auth.php');
 
 //Auth::routes(['verify' => true]);

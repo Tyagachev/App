@@ -1,5 +1,4 @@
 import axios from "axios";
-import store from "@/vuex/store.js";
 
 const state = {
     hints: [],
@@ -18,9 +17,13 @@ const mutations = {
 }
 
 const actions = {
+    UPDATE_HINT_VALUE: (context, payload) => {
+        axios.post('/api/hint/update', payload).then(response => {
+            console.log(response);
+        });
+    },
     HINTS_TICKES_LIST: (context) => {
         axios.get('/api/hint/index').then(response => {
-            console.log(response);
             context.commit('SET_HINTS', response.data);
         })
     }

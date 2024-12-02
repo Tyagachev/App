@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Hint;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Hint\HintResource;
 use App\Models\Hint;
+use App\Services\Hint\HintService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -12,6 +13,8 @@ class HintController extends Controller
 {
 
     /**
+     * Вывод списка подсказок
+     *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Foundation\Application|\Illuminate\Http\Response
      */
     public function index(): Response
@@ -21,11 +24,15 @@ class HintController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Обновление подсказок
+     *
+     * @param Request $request
+     * @param HintService $service
+     * @return bool|int
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, HintService $service): bool|int
     {
-        //
+        return $service->updateHint($request->all());
     }
 
 }
