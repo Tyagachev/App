@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Hint;
+namespace App\Http\Resources\Feedback;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class HintResource extends JsonResource
+class FeedbackResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,10 +15,9 @@ class HintResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'hint' => $this->hint,
-            'ticket' => $this->ticket,
-            'title' => $this->ticket->title
+            'score' => $this->score,
+            'comment'=> $this->comment,
+            'user' => $this->user
         ];
     }
 }

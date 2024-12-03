@@ -24,6 +24,17 @@ class HintController extends Controller
     }
 
     /**
+     * Получение подсказки по id билета
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Foundation\Application|Response
+     */
+    public function show($id): Response
+    {
+        return response(new HintResource(Hint::query()->find($id)));
+    }
+
+    /**
      * Обновление подсказок
      *
      * @param Request $request

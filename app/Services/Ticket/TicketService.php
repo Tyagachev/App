@@ -27,8 +27,6 @@ class TicketService
             $inArray = $answer + ['ticket_id' => $ticket->id];
             Answer::query()->create($inArray);
         }
-
-
         return true;
     }
 

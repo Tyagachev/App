@@ -58,7 +58,7 @@ class TaskService
     public function getTaskResult(int $id)
     {
         return Task::query()
-            ->select('tickets.title','tickets.content','answers.answer','answers.answer','answers.picked')
+            ->select('tickets.id','tickets.title','tickets.content','answers.answer','answers.answer','answers.picked')
             ->join('tickets', 'tickets.id', '=','tasks.ticket_id')
             ->join('answers', 'answers.id', '=', 'tasks.answer_id')
             ->join('users', 'users.id','=', 'tasks.user_id')

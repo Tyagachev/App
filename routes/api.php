@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Statistics\StatisticsController;
 use App\Http\Controllers\Api\Ticket\TicketController;
 use App\Http\Controllers\Api\Answer\AnswerController;
 use App\Http\Controllers\Api\Task\TaskController;
+use App\Http\Controllers\Api\Feedback\FeedbackController;
 use App\Http\Controllers\Api\Auth\Check\CheckController;
 
 require_once (__DIR__ . '/Auth/auth.php');
@@ -50,6 +51,7 @@ Route::group(['middleware' => 'logged:sanctum'], function () {
      **/
     Route::prefix('hint')->group(function () {
         Route::get('/index', [HintController::class, 'index']);
+        Route::get('/show/{id}', [HintController::class, 'show']);
         Route::post('/update', [HintController::class, 'update']);
     });
 
@@ -68,6 +70,15 @@ Route::group(['middleware' => 'logged:sanctum'], function () {
         Route::post('/store', [TaskController::class, 'store']);
         Route::get('/show/{id}', [TaskController::class, 'show']);
         Route::post('/destroy', [TaskController::class, 'destroy']);
+        Route::get('/count/{id}', [TaskController::class, 'getTasksCount']);
+    });
+
+    /**
+     * Feedback
+     **/
+    Route::prefix('feedback')->group(function () {
+        Route::post('/index', [FeedbackController::class, 'index']);
+        Route::post('/store', [FeedbackController::class, 'store']);
     });
 
     /**

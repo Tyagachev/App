@@ -14,6 +14,9 @@ class HintService
      */
     public function updateHint(array $data): bool|int
     {
-        return Hint::query()->find($data['hintId'])->update(['hint' => $data['hintValue']]);
+
+        return Hint::query()->find($data['hintId'])->update([
+            'hint' => str_replace(["\r\n", "\r", "\n"], "<br/>", $data['hintValue'])
+        ]);
     }
 }

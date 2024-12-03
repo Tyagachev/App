@@ -1,5 +1,4 @@
 <template>
-     <h5>Hint</h5>
     <div v-for="h in getHints" :key="h.id">
             <div class="card card-primary mb-0 mt-1" >
                 <div class="card-header">

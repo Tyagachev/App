@@ -46,10 +46,22 @@ class TestAuthController extends Controller
             ->join('users', 'users.id','=', 'tasks.user_id')
             ->where('tasks.user_id', '=', 1)->get();
         dd($task);*/
-        $ticket = Ticket::query()->find(3);
+        /*$ticket = Ticket::query()->find(3);
         if (sizeof($ticket->answers) === 0) {
             $ticket->delete();
-        }
+        }*/
+       /* $t = Task::query()->select('tasks.id')
+            ->join('tickets', 'tickets.id', '=', 'tasks.ticket_id')
+            ->join('users', 'users.id', '=', 'tasks.user_id')
+            ->where('users.id', '=', 1)->count();
+        dd($t);*/
+        $data = [
+            'user_id' => 1,
+            'comment' => 'fdfdgfg',
+            'score' => 3
+        ];
+        $user =  User::query()->find($data['user_id']);
+        $user->feeds()->create($data);
     }
 }
 

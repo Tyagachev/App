@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Task;
 
 use App\Http\Controllers\Controller;
+use App\Models\Task;
 use App\Services\Task\TaskService;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
@@ -61,4 +62,21 @@ class TaskController extends Controller
     {
         return $service->destroyTasksAnswers($request->get('id'));
     }
+
+    /**
+     * Получение колличесва отвеченных
+     * заданий
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|Application|Response
+     */
+    public function getTasksCount($id): Response
+    {
+        $countTasks = Task::query()->select('tasks.id')
+            ->join('tickets', 'tickets.id', '=', 'tasks.ticket_id')
+            ->join('users', 'users.id', '=', 'tasks.user_id')
+            ->where('users.id', '=', $id)->count();
+        return response($countTasks);
+    }
+
 }

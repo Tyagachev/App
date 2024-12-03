@@ -88,4 +88,5 @@ class TicketController extends Controller
 
         return response('Destroy', 201);
     }
+
 }

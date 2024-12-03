@@ -74,4 +74,12 @@ class User extends Authenticatable
         return $this->hasMany(Task::class);
     }
 
+    /**
+     * @return HasOne
+     */
+    public function feeds(): HasOne
+    {
+        return $this->hasOne(Feedback::class);
+    }
+
 }
