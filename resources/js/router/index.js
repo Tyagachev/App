@@ -49,12 +49,6 @@ const routes = [
             ]
         },
         children:[{
-            path: '/statistics',
-            name: 'statistics.page',
-            components: {
-                page: () => import('../components/pages/Statistics/StatisticsComponent.vue')
-            }
-        },{
             path: '/ticket/list',
             name: 'ticket.list.page',
             components: {
@@ -107,6 +101,18 @@ const routes = [
             name: 'task.page',
             components: {
                 page: () => import('../components/pages/Task/TaskComponent.vue')
+            }
+        },{
+            path: '/statistics',
+            name: 'statistics.page',
+            components: {
+                page: () => import('../components/pages/Statistics/StatisticsComponent.vue')
+            }
+        },{
+            path: '/feedback',
+            name: 'feed.page',
+            components: {
+                page: () => import('../components/pages/Feedback/FeedbackComponent.vue')
             }
         }],
     },

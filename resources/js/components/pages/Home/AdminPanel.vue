@@ -30,7 +30,7 @@
                     </div>
 
                     <!-- SidebarSearch Form -->
-                    <div class="form-inline">
+                    <!--<div class="form-inline">
                         <div class="input-group" data-widget="sidebar-search">
                             <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
                             <div class="input-group-append">
@@ -39,7 +39,7 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                         <SidebarMenu />
                 </div>
                 <!-- /.sidebar -->
@@ -55,7 +55,7 @@
                                 <!--<h1 class="m-0">Starter Page</h1>-->
                             </div>
                             <!-- /.col -->
-                            <div class="col-sm-6">
+                            <!--<div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <router-link :to="{name: 'home.page'}">
                                         <li class="breadcrumb-item">Home</li>
@@ -65,7 +65,7 @@
                                         <li class="breadcrumb-item">Starter Page</li>
                                     </router-link>
                                 </ol>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>

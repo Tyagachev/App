@@ -61,7 +61,7 @@ export default {
     },
     computed: {
         getVrf() {
-          return this.$store.getters['verifyModule/GET_VERIFIELD'];
+          return this.$store.getters['verifyModule/GET_VERIFIED'];
         },
         getError() {
             return this.$store.getters['verifyModule/GET_ERROR'];

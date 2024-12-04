@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Feedback\FeedbackResource;
+use App\Models\Feedback;
 use App\Models\Task;
 use App\Models\Ticket;
 use App\Models\User;
@@ -55,13 +57,13 @@ class TestAuthController extends Controller
             ->join('users', 'users.id', '=', 'tasks.user_id')
             ->where('users.id', '=', 1)->count();
         dd($t);*/
-        $data = [
-            'user_id' => 1,
-            'comment' => 'fdfdgfg',
-            'score' => 3
-        ];
-        $user =  User::query()->find($data['user_id']);
-        $user->feeds()->create($data);
+        try {
+            return FeedbackResource::collection(Feedback::all());
+        }catch (\Exception $e) {
+            echo $e->getMessage();
+        }
+        //$user =  User::query()->find($data['user_id']);
+        //$user->feeds()->create($data);
     }
 }
 

@@ -36,7 +36,7 @@ export default {
     },
     methods: {
         hints() {
-            store.dispatch('hintModule/HINTS_TICKES_LIST');
+            store.dispatch('hintModule/HINTS_TICKETS_LIST');
         },
         update(h) {
             this.form.hintId = h.id;

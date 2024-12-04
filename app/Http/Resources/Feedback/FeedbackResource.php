@@ -15,9 +15,11 @@ class FeedbackResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'user_id' => $this->user->id,
+            'name' => $this->user->name,
             'score' => $this->score,
             'comment'=> $this->comment,
-            'user' => $this->user
+            'created_at' => date('d.m.Y', strtotime($this->created_at))
         ];
     }
 }

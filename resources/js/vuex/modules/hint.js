@@ -20,7 +20,7 @@ const actions = {
     UPDATE_HINT_VALUE: (context, payload) => {
         axios.post('/api/hint/update', payload)
     },
-    HINTS_TICKES_LIST: (context) => {
+    HINTS_TICKETS_LIST: (context) => {
         axios.get('/api/hint/index').then(response => {
             context.commit('SET_HINTS', response.data);
         })

@@ -3,17 +3,20 @@
         <div v-if="result.length === 0">
             <h2 class="text-center">Тест пройден успешно!</h2>
             <div class="d-flex justify-content-center mt-4">
-                <div>
+                <div class="text-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="green" class="bi bi-check-circle" viewBox="0 0 16 16">
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
                         <path d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05"/>
                     </svg>
-                    <div>
+                    <div class="mt-5" v-if="!isFeed">
+                        <h3>Добавить отзыв</h3>
                         <FeedBackCreate />
+                    </div>
+                    <div v-else>
+                        <h3 class="text-center mt-4">Спасибо за отзыв!</h3>
                     </div>
                 </div>
             </div>
-
         </div>
         <div v-if="result.length">
             <a @click.prevent="again()" class="mb-4">Пройти тест заново</a>
@@ -107,6 +110,7 @@ export default {
             hints: {},
             tasksCount: null,
             ticketCount: null,
+            isFeed: null,
             form: {
                 ticket_id: null,
                 answer_id: null,
@@ -118,6 +122,7 @@ export default {
         this.getUser()
         this.getTasksCount()
         this.getTicketCount()
+        this.getFeed()
     },
     methods: {
         async getUser() {
@@ -133,7 +138,7 @@ export default {
         },
         async getTasksCount() {
             await axios.get('/api/task/count/' + this.user.id).then(response => {
-                    this.tasksCount = response.data
+                    this.tasksCount = response.data;
             });
         },
         async tasksList() {
@@ -156,12 +161,18 @@ export default {
         },
         getResult() {
           axios.get('/api/task/show/' + this.user.id).then(response => {
-              this.result = response.data
+              this.result = response.data;
           });
         },
         getHint(resultId) {
           axios.get('/api/hint/show/' + resultId).then(response => {
-             this.hints = response.data
+             this.hints = response.data;
+          })
+        },
+        async getFeed() {
+            await this.getUser()
+            axios.get('/api/feedbacks/show/' + this.user.id).then(response => {
+              this.isFeed = response.data;
           })
         },
         again() {

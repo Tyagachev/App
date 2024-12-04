@@ -3,7 +3,7 @@
         <div class="review_stars_wrap mt-4" >
             <div id="review_stars" v-for="v in values">
                 <div class="ml-2 mr-2">
-                    <input :id="'star-' + v" type="radio" :checked=checked v-model="value" :value="v" name="stars"/>
+                    <input :id="'star-' + v" type="radio" :checked=checked v-model="score" :value="v" name="stars"/>
                     <label :for="'star-' + v">
                         <div>
                             <span class="star_num ml-2 mr-2">{{v}}</span>
@@ -14,9 +14,9 @@
             </div>
         </div>
         <div>
-            <textarea class="w-100" v-model="comment"></textarea>
+            <textarea class="w-100" rows="6" v-model="comment"></textarea>
             <form @click.prevent="sendFeedBack">
-                <save-button></save-button>
+                <button class="btn btn-success w-100">Отправить</button>
             </form>
         </div>
     </div>
@@ -34,14 +34,14 @@ export default {
           values: [1, 2, 3, 4, 5],
           checked: false,
           comment: null,
-          value: null,
+          score: null,
       }
     },
     methods: {
       sendFeedBack() {
-          axios.post('/api/feedback/store', {
+          axios.post('/api/feedbacks/store', {
               form: {
-                  score: this.value,
+                  score: this.score,
                   comment: this.comment,
                   user_id: this.getUser.id
               },

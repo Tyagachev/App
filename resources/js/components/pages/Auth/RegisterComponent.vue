@@ -104,8 +104,9 @@ export default {
                     this.lock = true;
                     localStorage.setItem('x_xsrf_token', response.config.headers['X-CSRF-TOKEN']);
                     localStorage.setItem('uid', response.data.user.id);
-                    this.$router.push({ name:'verify.page' });
-                    //this.$router.push({ name: 'home.page', params: { id: res.data.user.id } })
+                    if (localStorage.getItem('x_xsrf_token')) {
+                        this.$router.push({ name:'verify.page' });
+                    }
                 }
             }).catch(error => {
                 this.errors = error.response.data.errors;

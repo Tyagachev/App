@@ -76,8 +76,9 @@ Route::group(['middleware' => 'logged:sanctum'], function () {
     /**
      * Feedback
      **/
-    Route::prefix('feedback')->group(function () {
-        Route::post('/index', [FeedbackController::class, 'index']);
+    Route::prefix('feedbacks')->group(function () {
+        Route::get('/index', [FeedbackController::class, 'index']);
+        Route::get('/show/{id}', [FeedbackController::class, 'show']);
         Route::post('/store', [FeedbackController::class, 'store']);
     });
 

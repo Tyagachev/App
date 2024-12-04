@@ -16,12 +16,20 @@ class FeedbackController extends Controller
      */
     public function index()
     {
-        return FeedbackResource::collection(Feedback::all());
+        $feedCollection = FeedbackResource::collection(Feedback::all());
+        return response($feedCollection);
     }
 
-    public function show($id)
+    /**
+     * Проверка на то есть ли отзыв у пользователя
+     *
+     * @param int $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Foundation\Application|Response
+     */
+    public function show(int $id): Response
     {
-
+        return response(Feedback::query()
+            ->where('user_id', '=', $id)->first('id'));
     }
 
     /**

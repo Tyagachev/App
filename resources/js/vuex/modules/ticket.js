@@ -91,12 +91,19 @@ const actions = {
      * @constructor
      */
     SEND_CONTENT_TICKET: (context, form) => {
+        let ans = [];
+        Object.entries(form.answers).forEach(([key, el]) => {
+            if (el.answer === '') {
+                form.answers.splice(Number(key), 1)
+            } else if (el.answer !== '') {
+                ans.push(el);
+            }
+        });
         axios.post('/api/ticket/store', {
             title: form.title,
             content: store.state.content,
-            answers: form.answers
+            answers: ans
         }).then( response => {
-            console.log(response);
             if (response.status === 201) {
                     window.location.replace('/ticket/list');
                 }
