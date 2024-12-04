@@ -45,10 +45,8 @@ export default {
                   comment: this.comment,
                   user_id: this.getUser.id
               },
-
-          }).then(response => {
-              console.log(response);
-          });
+          })
+          window.location.reload();
       },
         e(ev) {
             this.form.value = ev;

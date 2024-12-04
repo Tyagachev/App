@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\TestAuthController;
 
@@ -37,6 +38,14 @@ Route::get('/migrate/fresh', function() {
     Artisan::call('migrate:fresh');
 
     return "Freshed";
+});
+
+Route::get('/db', function() {
+    try {
+        DB::connection()->getPdo();
+    } catch (\Exception $e) {
+        die("Could not connect to the database.  Please check your configuration. error:" . $e );
+    }
 });
 
 Route::get('{page}', [App\Http\Controllers\IndexController::class, 'index'])->where('page', '.*');

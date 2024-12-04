@@ -19,7 +19,7 @@
             </div>
         </div>
         <div v-if="result.length">
-            <a @click.prevent="again()" class="mb-4">Пройти тест заново</a>
+            <a href="#" @click.prevent="again()" class="mb-4">Пройти тест заново</a>
             <div v-for="res in result" class="mb-1">
                 <div class="d-flex justify-content-between border border-secondary">
                         <div class="p-2">
@@ -59,7 +59,7 @@
                             </div>
                         </div>
                         <div class="bd-example">
-                            <a href="" @click.prevent="getHint(res.id)" data-bs-toggle="modal" data-bs-target="#exampleModalCenteredScrollable">
+                            <a href="#" @click.prevent="getHint(res.id)" data-bs-toggle="modal" data-bs-target="#exampleModalCenteredScrollable">
                                 Справка
                             </a>
                         </div>

@@ -22,7 +22,7 @@ class TicketController extends Controller
      */
     public function index(): Response
     {
-        return response(TicketResource::collection(Ticket::all()->sortByDesc('created_at')));
+        return response(TicketResource::collection(Ticket::all()));
     }
 
     /**

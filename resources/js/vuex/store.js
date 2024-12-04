@@ -14,6 +14,7 @@ const store = createStore({
          content: '',
          recoveryMail: '',
          token: '',
+         role: null,
          user: {
              loggedIn: localStorage.getItem('l'),
              verify: false,

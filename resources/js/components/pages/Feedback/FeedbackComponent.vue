@@ -1,4 +1,7 @@
 <template>
+    <div v-if="!feeds.length">
+        <h2 class="text-center">Отзывов ещё нет</h2>
+    </div>
     <div v-for="feed in feeds" class="col-md-9">
         <div class="card">
             <div class="card-body">

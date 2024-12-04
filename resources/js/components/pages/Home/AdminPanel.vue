@@ -121,6 +121,7 @@ import SidebarMenu from "@/components/SidebarMenu/SidebarMenu.vue";
 import Header from "@/components/Header/Header.vue";
 import PageLayout from "@/components/Layouts/PageLayout.vue";
 import Loader from "vue3-ui-preloader";
+import axios from "axios";
 export default {
     name: "AdminPanel",
     components: {
@@ -137,10 +138,18 @@ export default {
         }
     },
     mounted() {
+        this.getRole()
         this.$store.dispatch('authModule/AUTH_USER');
         setTimeout(() => {
             this.loading = false;
         }, 0);
+    },
+    methods: {
+        getRole() {
+            axios.get('/api/check/auth/user').then(response => {
+                this.$store.state.role = response.data.role
+            });
+        }
     },
     computed: {
         user() {
