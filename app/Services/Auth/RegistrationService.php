@@ -2,7 +2,7 @@
 
 namespace App\Services\Auth;
 
-use App\Actions\Auth\Registration\SendMailVerifiedNumber;
+use App\Actions\Auth\SendMails\VerificationNumber\Registration\VerifiedNumber;
 use App\Models\User;
 use App\Models\UserVerifiedNumber;
 use Illuminate\Database\Eloquent\Model;
@@ -51,35 +51,23 @@ class RegistrationService
      */
     public function createVerifiedNumber(object $user): Response
     {
+        //объект класса для получения поля number
         $createNumber = new UserVerifiedNumber();
-        $createNumber->number = random_int(111111, 999999);
+        //подготовка к отправки письма, сбор данных
+        $sendNumber = new VerifiedNumber($user->email, $createNumber->number = random_int(111111, 999999));
 
         if (UserVerifiedNumber::query()->where('uid', '=', $user->id)->first()) {
             $user->verify()->update(['number' => $createNumber->number]);
-            $this->callActionSendMail($user, $createNumber);
+            //отправка письма
+            $sendNumber->sendMail();
 
             return response('Code send again', 200);
         } else {
             $user->verify()->save($createNumber);
-            $this->callActionSendMail($user, $createNumber);
-
+            //отправка письма
+            $sendNumber->sendMail();
 
             return response('Created code', 201);
         }
-
     }
-
-    /**
-     * Метод запуска экшена отправки письма с кодом
-     *
-     * @param object $user
-     * @param object $createNumber
-     * @return void
-     */
-    private function callActionSendMail(object $user, object $createNumber): void
-    {
-        $action = new SendMailVerifiedNumber();
-        $action->sendMailVerify($user, $createNumber);
-    }
-
 }

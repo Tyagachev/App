@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Auth\Interfaces;
+namespace App\Actions\Auth\SendMails\VerificationNumber\Interfaces;
 
 interface Factory
 {

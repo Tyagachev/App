@@ -19,7 +19,7 @@ class HintController extends Controller
      */
     public function index(): Response
     {
-        $hints = Hint::all();
+        $hints = Hint::all()->sortDesc();
         return response(HintResource::collection($hints));
     }
 

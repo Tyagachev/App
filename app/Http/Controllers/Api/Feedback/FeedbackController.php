@@ -16,7 +16,7 @@ class FeedbackController extends Controller
      */
     public function index()
     {
-        $feedCollection = FeedbackResource::collection(Feedback::all());
+        $feedCollection = FeedbackResource::collection(Feedback::all()->sortDesc());
         return response($feedCollection);
     }
 

@@ -2,22 +2,19 @@
 
 namespace App\Actions\Auth\SendMails\VerificationNumber\Registration;
 
-use App\Mail\User\VerifiedNumber;
-use Illuminate\Mail\SentMessage;
+use App\Actions\Auth\SendMails\VerificationNumber\AbstractVerificationFactory;
+use App\Mail\User\Verified;
 use Illuminate\Support\Facades\Mail;
 
-class SendMailVerifiedNumber
+class VerifiedNumber extends AbstractVerificationFactory
 {
-
     /**
      * Отпарвка проверочного кода юзеру на почту
      *
-     * @param object $user
-     * @param object $createNumber
-     * @return \Illuminate\Mail\SentMessage|null
+     * @return void
      */
-    public function sendMailVerify(object $user, object $createNumber): SentMessage|null
+    public function sendMail(): void
     {
-        return Mail::to($user->email)->send(new VerifiedNumber($createNumber->number));
+        Mail::to($this->email)->send(new Verified($this->number));
     }
 }

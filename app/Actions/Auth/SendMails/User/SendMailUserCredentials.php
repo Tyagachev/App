@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Auth\User;
+namespace App\Actions\Auth\SendMails\User;
 
 use App\Mail\User\UserCredentials;
 use Illuminate\Support\Facades\Mail;

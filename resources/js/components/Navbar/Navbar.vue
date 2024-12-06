@@ -4,11 +4,11 @@
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
-            <!--<li class="nav-item d-none d-sm-inline-block">
+            <li class="nav-item d-none d-sm-inline-block">
                 <router-link :to="{name:'home.page'}">
                     <a href="" class="nav-link">Home</a>
                 </router-link>
-            </li>-->
+            </li>
         </ul>
 
         <!-- Right navbar links -->

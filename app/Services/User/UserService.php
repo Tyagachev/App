@@ -2,7 +2,7 @@
 
 namespace App\Services\User;
 
-use App\Actions\Auth\User\SendMailUserCredentials;
+use App\Actions\Auth\SendMails\User\SendMailUserCredentials;
 use App\Models\User;
 use App\Models\UserVerifiedNumber;
 use Exception;

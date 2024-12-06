@@ -1,5 +1,6 @@
 import axios from "axios";
 import store from "../store.js";
+import router from "@/router/index.js";
 const state = {
     ticket: {},
     tickets: [],
@@ -92,6 +93,7 @@ const actions = {
      */
     SEND_CONTENT_TICKET: (context, form) => {
         let ans = [];
+
         Object.entries(form.answers).forEach(([key, el]) => {
             if (el.answer === '') {
                 form.answers.splice(Number(key), 1)
@@ -99,13 +101,14 @@ const actions = {
                 ans.push(el);
             }
         });
+
         axios.post('/api/ticket/store', {
             title: form.title,
             content: store.state.content,
             answers: ans
         }).then( response => {
             if (response.status === 201) {
-                    window.location.replace('/ticket/list');
+                router.push('/ticket/list');
                 }
         }).catch(err => {
             console.log(err.response);
@@ -126,7 +129,7 @@ const actions = {
             answers: form.answers
         }).then( response => {
             if (response.status === 200) {
-                window.location.replace('/ticket/list');
+                router.push('/ticket/list');
             }
         })
     },

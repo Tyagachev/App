@@ -2,7 +2,7 @@
 
 namespace App\Services\Auth;
 
-use App\Actions\Auth\RecoveryPassword\SendMailRecoveryNumber;
+use App\Actions\Auth\SendMails\VerificationNumber\RecoveryPassword\RecoveryNumber;
 use App\Models\RecoveryPassword;
 use App\Models\User;
 use Illuminate\Http\Response;
@@ -29,17 +29,18 @@ class RecoveryPasswordService
         $hasRecoveryNumber = RecoveryPassword::query()->where('email', $user->email)->first();
 
         $number = random_int(111111, 999999);
-
+        $sendNumber = new RecoveryNumber($user->email, $number);
 
         if ($user && $hasRecoveryNumber) {
             $hasRecoveryNumber->update(['number' => $number]);
-            $this->sendMail($user->email, $number);
+            //запускаем отравку
+            $sendNumber->sendMail();
 
             return response($user->email, 201);
 
         } elseif ($user && !$hasRecoveryNumber) {
-
-            $this->sendMail($user->email, $number);
+            //запускаем отравку
+            $sendNumber->sendMail();
 
             $create = RecoveryPassword::query()->create([
                 'email' => $user->email,
@@ -84,11 +85,5 @@ class RecoveryPasswordService
             ->update(['password' => Hash::make($data['password'])]);
 
         return response('Updated', 201);
-    }
-
-    private function sendMail(string $mail, int $number): void
-    {
-        $sendNumber = new SendMailRecoveryNumber();
-        $sendNumber->sendRecoveryNumber($mail, $number);
     }
 }

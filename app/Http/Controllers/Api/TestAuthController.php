@@ -17,7 +17,7 @@ class TestAuthController extends Controller
     private string $dbName = 'app';
     private string $userName = 'root';
     private string $password = '';
-    public function test()
+    /*public function test()
     {
         $connect = mysqli_connect(
             "$this->host",
@@ -30,7 +30,7 @@ class TestAuthController extends Controller
         $res = mysqli_query($connect, $sql)->fetch_object();
 
         return json_encode($res);
-    }
+    }*/
 
     public function test2(Request $request)
     {
@@ -57,13 +57,8 @@ class TestAuthController extends Controller
             ->join('users', 'users.id', '=', 'tasks.user_id')
             ->where('users.id', '=', 1)->count();
         dd($t);*/
-        try {
-            return FeedbackResource::collection(Feedback::all());
-        }catch (\Exception $e) {
-            echo $e->getMessage();
-        }
-        //$user =  User::query()->find($data['user_id']);
-        //$user->feeds()->create($data);
+        $user =  User::query()->find($this->id);
+        dd(gettype($user->email)) ;
     }
 }
 
