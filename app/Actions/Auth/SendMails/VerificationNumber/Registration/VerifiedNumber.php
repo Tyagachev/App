@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Auth\Registration;
+namespace App\Actions\Auth\SendMails\VerificationNumber\Registration;
 
 use App\Mail\User\VerifiedNumber;
 use Illuminate\Mail\SentMessage;

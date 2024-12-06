@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Auth\RecoveryPassword;
+namespace App\Actions\Auth\SendMails\VerificationNumber\RecoveryPassword;
 
 use App\Mail\User\RecoveryNumber;
 use Illuminate\Support\Facades\Mail;

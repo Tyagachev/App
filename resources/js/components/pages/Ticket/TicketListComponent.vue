@@ -73,6 +73,10 @@ export default {
     },
     mounted() {
         this.ticketList();
+
+    },
+    updated() {
+        this.resizeImage()
     },
     methods: {
         ticketList() {
@@ -82,12 +86,25 @@ export default {
             axios.delete('/api/ticket/destroy/' + id).then(() => {
                 this.ticketList();
             })
+        },
+        resizeImage() {
+            let img = document.getElementsByTagName('img');
+            let array = Array.from(img);
+
+            //Устанавливаю размер 100% для тега img
+            //в противном случае изображение не масштабируется
+            array.forEach(el => {
+                    console.log(el.width = 100 + 'px');
+                    el.style.width = '100%';
+                    el.style.height = '100%';
+            });
         }
     },
     computed: {
         tickets() {
             return this.$store.getters['ticketModule/GET_TICKETS_LIST']
                 .filter(item => item.title.indexOf(this.$store.state.search) !== -1);
+
         },
         user() {
             return this.$store.getters['authModule/GET_AUTH_USER'];
@@ -97,8 +114,5 @@ export default {
 </script>
 
 <style>
- /*img{
-    width: 50%;
-     height: 50%;
-}*/
+
 </style>
