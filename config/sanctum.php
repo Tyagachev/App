@@ -9,15 +9,15 @@ return [
     | Stateful Domains
     |--------------------------------------------------------------------------
     |
-    | Requests from the following domains / hosts will receive stateful API
-    | authentication cookies. Typically, these should include your local
-    | and production domains which access your API via a frontend SPA.
+    | Запросы от следующих доменов / хостов будут получать API с отслеживанием состояния
+    | файлы cookie для аутентификации. Как правило, это должны быть ваши локальные
+    | и рабочие домены, которые получают доступ к вашему API через интерфейс SPA.
     |
     */
 
     'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', sprintf(
         '%s%s',
-        'nanumdeveloper.ru,localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1',
+        'nanumdeveloper.ru,localhost,localhost:5173,localhost:3000,127.0.0.1,127.0.0.1:8000,::1',
         Sanctum::currentApplicationUrlWithPort()
     ))),
 

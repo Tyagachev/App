@@ -57,8 +57,14 @@ class TestAuthController extends Controller
             ->join('users', 'users.id', '=', 'tasks.user_id')
             ->where('users.id', '=', 1)->count();
         dd($t);*/
-        $user =  User::query()->find($this->id);
-        dd(gettype($user->email)) ;
+        //$user =  User::query()->find($this->id);
+        //dd(gettype($user->email)) ;
+        return 1111;
+    }
+
+    public function create(Request $request)
+    {
+        return $request->all();
     }
 }
 

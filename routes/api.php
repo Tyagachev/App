@@ -95,6 +95,8 @@ Route::group(['middleware' => 'logged:sanctum'], function () {
      **/
     Route::post('/generate-password', [GenerateController::class, 'create']);
     Route::get('/test/{id}', [\App\Http\Controllers\Api\TestAuthController::class, 'test'])->name('test');
-});
 
+});
+Route::get('/test2', [\App\Http\Controllers\Api\TestAuthController::class, 'test2'])->name('test');
+Route::post('/test2/post', [\App\Http\Controllers\Api\TestAuthController::class, 'create']);
 //Auth::routes(['verify' => true]);
