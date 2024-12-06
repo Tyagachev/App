@@ -22,7 +22,8 @@ class TicketController extends Controller
      */
     public function index(): Response
     {
-        return response(TicketResource::collection(Ticket::all()));
+        $ticketCollection = TicketResource::collection(Ticket::all()->sortDesc());
+        return response($ticketCollection);
     }
 
     /**

@@ -11,10 +11,13 @@ use Illuminate\Http\Request;
 
 class FeedbackController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
+     * Получение списка отзвывов
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Foundation\Application|Response
      */
-    public function index()
+    public function index(): Response
     {
         $feedCollection = FeedbackResource::collection(Feedback::all()->sortDesc());
         return response($feedCollection);

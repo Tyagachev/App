@@ -124,6 +124,9 @@ export default {
         this.getTicketCount()
         this.getFeed()
     },
+    updated() {
+        this.resizeImage()
+    },
     methods: {
         async getUser() {
             await axios.get('/api/check/auth/user').then(response => {
@@ -150,6 +153,17 @@ export default {
                         this.getResult();
                     }
                 })
+        },
+        resizeImage() {
+            let img = document.getElementsByTagName('img');
+            let array = Array.from(img);
+
+            //Устанавливаю размер 100% для тега img
+            //в противном случае изображение не масштабируется
+            array.forEach(el => {
+                el.style.width = '100%';
+                el.style.height = '100%';
+            });
         },
         sendAnswer() {
             axios.post('/api/task/store', this.form).then(response => {

@@ -94,7 +94,6 @@ export default {
             //Устанавливаю размер 100% для тега img
             //в противном случае изображение не масштабируется
             array.forEach(el => {
-                    console.log(el.width = 100 + 'px');
                     el.style.width = '100%';
                     el.style.height = '100%';
             });
