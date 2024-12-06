@@ -136,12 +136,10 @@ export default {
             axios.post('/api/recovery-password', {
                 email: this.form.email
             }).then(response => {
-                if (response.status === 201) {
-                    this.$store.dispatch('RECOVERY_MAIL', response.data);
-                    this.visibleInputEmail = false;
-                    this.visibleInputCode = true;
-                    this.form.email = null;
-                }
+                this.$store.dispatch('RECOVERY_MAIL', response.data);
+                this.visibleInputEmail = false;
+                this.visibleInputCode = true;
+                this.form.email = null;
             }).catch(error => {
                 if (error.response.status === 404) {
                     this.emailNotFound = error.response.data
